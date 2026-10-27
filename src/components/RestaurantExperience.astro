@@ -1,0 +1,77 @@
+---
+// src/components/RestaurantExperience.astro
+// Uses 100% real Cotto Napoliten restaurant, oven, and food photos
+const galleryItems = [
+  {
+    title: 'Özel Tasarım Cotto Napoliten Kubbe Fırınımız',
+    subtitle: 'Dijital ısı kontrollü özel İtalyan kubbe fırınımızda 450°C’de 90 saniyede standart Napoliten pişirim.',
+    image: '/images/cotto/mekan-tas-firin.jpg',
+    span: 'col-span-1 md:col-span-2 md:row-span-2'
+  },
+  {
+    title: 'Ferah Restoran Salonu & Atmosfer',
+    subtitle: 'Modern aydınlatmalar ve sıcak İtalyan bistro oturma düzeni.',
+    image: '/images/cotto/mekan-ic-salon.jpg',
+    span: 'col-span-1'
+  },
+  {
+    title: 'Cotto Napoliten Marka Kimliği',
+    subtitle: 'Ahşap detaylar ve özenle tasarlanmış iç mimari konsepti.',
+    image: '/images/cotto/mekan-banko-logo.jpg',
+    span: 'col-span-1'
+  },
+  {
+    title: 'Misafir Konforu & Şık Masa Düzeni',
+    subtitle: 'Aileler ve arkadaş grupları için keyifli sosyal buluşma noktası.',
+    image: '/images/cotto/mekan-masalar.jpg',
+    span: 'col-span-1 md:col-span-2'
+  },
+  {
+    title: 'Cotto Napoliten Dış Cephe & Giriş',
+    subtitle: 'Bulunduğu caddede dikkat çeken prestijli mağaza cephesi.',
+    image: '/images/cotto/mekan-dis-cephe.jpg',
+    span: 'col-span-1'
+  }
+];
+---
+
+<section id="restoran-deneyimi" class="py-16 sm:py-24 bg-[#F6F3EE] border-b border-stone-200/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center max-w-3xl mx-auto space-y-3 mb-12">
+      <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-[#D9381E]">
+        GERÇEK RESTORAN ATMOSFERİMİZ
+      </p>
+      <h2 class="text-3xl sm:text-5xl font-black text-[#141210] tracking-tight uppercase">
+        Cotto Napoliten <span class="font-serif italic text-[#D9381E] capitalize">Mekan Konsepti</span>
+      </h2>
+      <p class="text-sm sm:text-base text-stone-600">
+        Çarşamba Merkez restoranımızdan gerçek kareler: Özel tasarım Cotto Napoliten fırınımız, modern salon dekorasyonu ve sıcak bistro atmosferi.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-auto sm:auto-rows-[260px]">
+      {galleryItems.map((item) => (
+        <div class={`group relative rounded-3xl overflow-hidden shadow-sm border border-stone-200 bg-stone-900 ${item.span} min-h-[230px]`}>
+          <img
+            src={item.image}
+            alt={item.title}
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
+
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <h3 class="text-lg sm:text-xl font-black text-white tracking-tight">
+              {item.title}
+            </h3>
+            <p class="text-xs text-stone-300 mt-1">
+              {item.subtitle}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

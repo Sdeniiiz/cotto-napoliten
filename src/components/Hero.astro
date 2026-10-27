@@ -1,0 +1,141 @@
+---
+// src/components/Hero.astro
+// Clean Domino's TR Style Bento Billboard Grid using Real Cotto Napoliten Photos & Videos
+// Minimal buttons, clean typography, focused on Brand & Franchise
+---
+
+<section class="pt-6 pb-12 sm:pt-8 sm:pb-16 bg-[#F6F3EE]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+
+    <!-- BENTO BILLBOARD GRID (8-Col Main Visual + 4-Col Stacked Visual Cards) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+
+      <!-- MAIN LEFT BILLBOARD (8 COLS): Real Cotto Oven Video & Franchise Pitch -->
+      <div class="lg:col-span-8 relative rounded-3xl overflow-hidden bg-[#141210] shadow-xl min-h-[420px] sm:min-h-[500px] flex flex-col justify-end p-7 sm:p-12 group">
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="/images/cotto/mekan-usta-firin.jpg"
+          class="absolute inset-0 w-full h-full object-cover object-center opacity-55 group-hover:scale-103 transition-transform duration-700"
+        >
+          <source src="/videos/cotto/usta-firin.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#141210] via-[#141210]/65 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#141210]/90 via-[#141210]/40 to-transparent"></div>
+
+        <!-- Clean Typography Copy (No Pill Badges) -->
+        <div class="relative z-10 max-w-2xl space-y-4">
+          <p class="text-[#E59838] text-xs font-extrabold uppercase tracking-[0.2em]">
+            450°C ÖZEL NAPOLİTEN FIRIN PİZZA & GURME BURGER ZİNCİRİ
+          </p>
+
+          <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-white uppercase tracking-tight leading-[1.03]">
+            GERÇEK NAPOLİTEN LEZZETİ,<br />
+            <span class="text-[#E59838] font-serif italic capitalize">Yüksek Kârlı</span> FRANCHISE.
+          </h1>
+
+          <p class="text-stone-200 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
+            72 saat soğuk fermantasyonla dinlenen Napoliten pizza hamuru, 90 saniyede pişirim sağlayan usta bağımsız özel kubbe fırın sistemi ve gurme burgerlerimizle Türkiye genelinde büyüyen lezzet ailesine katılın.
+          </p>
+
+          <div class="pt-3 flex flex-wrap items-center gap-6">
+            <a
+              href="/franchise"
+              class="px-7 py-3.5 rounded-xl bg-[#D9381E] hover:bg-[#b82810] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all"
+            >
+              Franchise Fırsatlarını İncele →
+            </a>
+            <a
+              href="#menu"
+              class="text-white hover:text-[#E59838] font-extrabold text-sm underline underline-offset-8 decoration-2 decoration-[#E59838] transition-colors"
+            >
+              Lezzet Kataloğuna Göz At
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT STACKED VISUAL CARDS (4 COLS) — Entire Card Clickable, No Extra Buttons Inside -->
+      <div class="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
+
+        <!-- Top Right Card: Franchise ROI & Store Concepts -->
+        <a
+          href="/franchise#franchise-calculator"
+          class="group relative rounded-3xl overflow-hidden bg-[#141210] text-white p-7 flex flex-col justify-end min-h-[240px] shadow-lg"
+        >
+          <img
+            src="/images/cotto/mekan-ic-salon.jpg"
+            alt="Cotto Napoliten Restoran İç Mekan ve Franchise Konsepti"
+            class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#141210] via-[#141210]/70 to-transparent"></div>
+
+          <div class="relative z-10 space-y-1.5">
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-[#E59838] block">
+              YATIRIMCI REHBERİ • 11-16 AY ROI
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black uppercase tracking-tight leading-snug group-hover:text-[#E59838] transition-colors">
+              3 Farklı Mağaza Konsepti & Kârlılık Simülatörü →
+            </h2>
+            <p class="text-xs text-stone-300 leading-relaxed">
+              Express, Bistro ve Gastro Lounge modellerimizin yatırım ve aylık net kazanç tablosunu inceleyin.
+            </p>
+          </div>
+        </a>
+
+        <!-- Bottom Right Card: Real 2'li Pizza & Burger Showcase -->
+        <a
+          href="/menu"
+          class="group relative rounded-3xl overflow-hidden bg-[#141210] text-white p-7 flex flex-col justify-end min-h-[240px] shadow-lg"
+        >
+          <img
+            src="/images/cotto/10_2li_Pizza_Menu.jpg"
+            alt="Cotto Napoliten Pizzalar ve Gurme Burgerler"
+            class="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:scale-105 transition-transform duration-500"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#141210] via-[#141210]/70 to-transparent"></div>
+
+          <div class="relative z-10 space-y-1.5">
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-[#E59838] block">
+              ÇİFT MOTORLU MENÜ GÜCÜ
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black uppercase tracking-tight leading-snug group-hover:text-[#E59838] transition-colors">
+              Napoliten Pizza & Calzone Burger Menüsü →
+            </h2>
+            <p class="text-xs text-stone-300 leading-relaxed">
+              Gerçek suda mozzarella, İtalyan şarküterisi ve özel Napoliten fırında kızaran Calzone Burger çeşitlerimiz.
+            </p>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- CLEAN TYPOGRAPHIC METRICS BAR (Divided Text Strip, Not 4 Button-Like Boxes) -->
+    <div class="bg-white rounded-2xl py-6 px-6 border border-stone-200/80 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:divide-x lg:divide-stone-200">
+      <div class="lg:px-4 first:lg:pl-0">
+        <div class="font-mono font-black text-2xl sm:text-3xl text-[#D9381E]">450°C / 90 Sn</div>
+        <div class="text-xs font-semibold text-stone-600 mt-1">Özel Kubbe Fırında Standart Pişirim</div>
+      </div>
+
+      <div class="lg:px-6">
+        <div class="font-mono font-black text-2xl sm:text-3xl text-[#141210]">72 Saat</div>
+        <div class="text-xs font-semibold text-stone-600 mt-1">Soğuk Fermantasyon Napoliten Hamuru</div>
+      </div>
+
+      <div class="lg:px-6">
+        <div class="font-mono font-black text-2xl sm:text-3xl text-emerald-600">%28 – %34</div>
+        <div class="text-xs font-semibold text-stone-600 mt-1">Hedeflenen Net İşletme Kâr Marjı</div>
+      </div>
+
+      <div class="lg:px-6">
+        <div class="font-mono font-black text-2xl sm:text-3xl text-[#141210]">45 Gün</div>
+        <div class="text-xs font-semibold text-stone-600 mt-1">Anahtar Teslim Mimari & Mutfak Kurulumu</div>
+      </div>
+    </div>
+
+  </div>
+</section>

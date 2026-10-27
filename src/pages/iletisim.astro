@@ -1,0 +1,81 @@
+---
+// src/pages/iletisim.astro
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="İletişim & Rezervasyon | Cotto Napoliten Çarşamba / Samsun"
+  description="Cotto Napoliten iletişim bilgileri: Kirazbucağı Mah. Kirazbucağı Sok. No:53/A Çarşamba/Samsun. Telefon & WhatsApp: 0 (545) 834 40 90."
+>
+  <section class="pt-28 pb-16 md:pt-36 md:pb-20 bg-[#12100E] text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="text-cotto-gold text-xs font-extrabold uppercase tracking-[0.2em] block mb-3">
+        BİZE ULAŞIN • SİPARİŞ & YATIRIMCI İLİŞKİLERİ
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold tracking-tight mb-4">
+        İletişim & <span class="italic font-normal text-cotto-gold">Merkez Ofis</span>
+      </h1>
+      <p class="text-white/75 text-base sm:text-lg font-light">
+        Restoran rezervasyonu, sıcak paket sipariş veya Franchise bölge tahsis görüşmeleri için bize doğrudan ulaşabilirsiniz.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-[#FBF8F3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+      <!-- Contact Details -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm space-y-6">
+          <div>
+            <span class="text-xs font-extrabold uppercase tracking-widest text-cotto-red block mb-1">FLAGSHIP RESTORAN & HQ</span>
+            <h2 class="text-2xl font-serif font-extrabold text-cotto-dark">Cotto Napoliten Çarşamba</h2>
+          </div>
+
+          <div class="space-y-4 text-sm">
+            <div>
+              <div class="font-bold text-cotto-dark">Adres</div>
+              <p class="text-cotto-muted">Kirazbucağı Mahallesi, Kirazbucağı Sokak (Sungurlu Cad. Kesişimi) No: 53/A, Çarşamba / Samsun</p>
+            </div>
+            <div>
+              <div class="font-bold text-cotto-dark">Telefon & WhatsApp Sipariş / Franchise Hattı</div>
+              <a href="tel:+905458344090" class="text-lg font-serif font-extrabold text-cotto-red hover:underline">
+                0 (545) 834 40 90
+              </a>
+            </div>
+            <div>
+              <div class="font-bold text-cotto-dark">Instagram</div>
+              <a href="https://www.instagram.com/cotto_napoliten/" target="_blank" rel="noopener noreferrer" class="text-cotto-red font-bold hover:underline">
+                @cotto_napoliten
+              </a>
+            </div>
+            <div>
+              <div class="font-bold text-cotto-dark">Yemeksepeti Resmi Mağaza</div>
+              <a href="https://www.yemeksepeti.com/restaurant/xiok/cotto-cafe-and-restoran-xiok" target="_blank" rel="noopener noreferrer" class="text-cotto-red font-bold hover:underline">
+                Cotto Cafe & Restoran (Online Sipariş) ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="lg:col-span-7">
+        <div class="bg-white rounded-3xl p-4 sm:p-6 border border-stone-200/80 shadow-sm h-full">
+          <div class="aspect-video w-full h-full min-h-[360px] rounded-2xl overflow-hidden">
+            <iframe
+              title="Cotto Napoliten Çarşamba Konum"
+              width="100%"
+              height="100%"
+              style="border:0"
+              loading="lazy"
+              allowfullscreen
+              src="https://www.google.com/maps?q=Kirazbuca%C4%9F%C4%B1+Mah.+Kirazbuca%C4%9F%C4%B1+Sok.+No:53/A+%C3%87ar%C5%9Famba+Samsun&output=embed"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

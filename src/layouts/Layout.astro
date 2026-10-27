@@ -1,0 +1,122 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  image?: string;
+  ogType?: string;
+  type?: string;
+  activePath?: string;
+  schemaJson?: Record<string, any> | Array<Record<string, any>>;
+}
+
+const {
+  title = 'Cotto Napoliten | Özel Napoliten Fırın Napoliten Pizza, Gurme Burger & Franchise',
+  description = 'Cotto Napoliten: 450°C Fornero özel Napoliten fırında 90 saniyede pişen 72 saat soğuk fermantasyon Napoliten pizzalar, gurme burgerler ve yüksek kârlı anahtar teslim franchise modeli.',
+  canonical = Astro.url.href,
+  image,
+  ogImage = image || '/images/cotto/01_Margherita_Pizza.jpg',
+  type,
+  ogType = type || 'website',
+  activePath = Astro.url.pathname,
+  schemaJson
+} = Astro.props;
+
+const defaultOrganizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  'name': 'Cotto Napoliten Pizza & Burger (Cotto Cafe & Restoran)',
+  'alternateName': 'COTTO Napoliten Türkiye',
+  'url': 'https://cottonapoliten.com',
+  'logo': 'https://cottonapoliten.com/images/logo.webp',
+  'slogan': '72 Saat Sabır, 450°C Ateş, 90 Saniyede Gerçek Napoliten.',
+  'servesCuisine': ['Italian', 'Neapolitan Pizza', 'Gourmet Burger'],
+  'priceRange': '₺₺',
+  'sameAs': [
+    'https://www.instagram.com/cotto_napoliten/',
+    'https://www.yemeksepeti.com/restaurant/xiok/cotto-cafe-and-restoran-xiok'
+  ],
+  'address': {
+    '@type': 'PostalAddress',
+    'streetAddress': 'Kirazbucağı Mahallesi, Kirazbucağı Sokak No: 53/A',
+    'addressLocality': 'Çarşamba',
+    'addressRegion': 'Samsun',
+    'addressCountry': 'TR'
+  },
+  'contactPoint': {
+    '@type': 'ContactPoint',
+    'telephone': '+90-545-834-4090',
+    'contactType': 'franchise and customer service',
+    'areaServed': 'TR',
+    'availableLanguage': 'Turkish'
+  }
+};
+
+const schemasToInject = schemaJson
+  ? Array.isArray(schemaJson)
+    ? [defaultOrganizationSchema, ...schemaJson]
+    : [defaultOrganizationSchema, schemaJson]
+  : [defaultOrganizationSchema];
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#D9381E" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Cotto Napoliten" />
+    <meta property="og:locale" content="tr_TR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="/images/logo.webp" />
+
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;0,9..144,900;1,9..144,700&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Structured Data (JSON-LD) -->
+    {schemasToInject.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#F6F3EE] text-[#141210] selection:bg-[#D9381E] selection:text-white font-sans">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 py-2 focus:bg-[#D9381E] focus:text-white focus:font-bold focus:rounded-lg focus:shadow-xl"
+    >
+      İçeriğe Atla
+    </a>
+
+    <Header activePath={activePath} />
+
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

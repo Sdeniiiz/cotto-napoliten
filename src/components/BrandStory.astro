@@ -1,0 +1,79 @@
+---
+const storySteps = [
+  {
+    num: '01',
+    title: 'Gerçek Napoliten Tutkusuyla Doğdu',
+    description: 'Endüstriyel, kalın hamurlu ve standartlaşmış fast-food pizzalarına alternatif olarak; gerçek Napoli hamurunu ulaşılabilir fiyatlarla sunma vizyonuyla Samsun Çarşamba’da yola çıktık.'
+  },
+  {
+    num: '02',
+    title: '72 Saatlik Fermantasyon Reçetesi',
+    description: 'Aylarca süren un, su hidratasyonu ve soğuk fermantasyon denemeleri sonucunda; yedikten sonra ağırlık yapmayan, leopar benekli kabaran imza hamurumuzu geliştirdik.'
+  },
+  {
+    num: '03',
+    title: 'Özel İtalyan Kubbe Fırın Devrimi',
+    description: 'Gerçek Napoliten lezzetini 450°C’de 90 saniyede sıfır hata ile pişiren dijital ısı kontrollü özel kubbe fırın sistemini mutfağımıza entegre ederek usta bağımlılığını ortadan kaldırdık.'
+  },
+  {
+    num: '04',
+    title: 'Gurme Brioche & Calzone Burgerler',
+    description: 'Menümüzü %100 dana kaburga köfteli tereyağlı brioche burgerler, 450°C özel Napoliten fırında pişen Calzone Burger ve özel yan lezzetlerle zenginleştirerek günün her saati yaşayan bir bistroya dönüştük.'
+  },
+  {
+    num: '05',
+    title: 'Yemeksepeti & Sosyal Medya Fenomeni',
+    description: '@cotto_napoliten Instagram paylaşımlarımız ve Yemeksepeti’ndeki yüksek müşteri memnuniyetimizle bölgenin en çok tercih edilen gastro-bistro markası haline geldik.'
+  },
+  {
+    num: '06',
+    title: 'Ulusal Franchise Büyüme Hamlesi',
+    description: 'Bugün kanıtlanmış birim ekonomimiz, merkezi reçete tedariğimiz ve anahtar teslim kurulum desteğimizle Cotto Napoliten’i Türkiye’nin dört bir yanındaki yatırımcılarla büyütüyoruz.'
+  }
+];
+---
+
+<section id="hikayemiz" class="py-24 sm:py-32 bg-[#161311] text-white border-b border-stone-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="max-w-3xl space-y-3 mb-16 text-center sm:text-left">
+      <p class="text-[#E59838] text-xs font-extrabold uppercase tracking-[0.2em]">
+        MARKA HİKAYEMİZ
+      </p>
+
+      <h2 class="text-4xl sm:text-6xl font-black text-white tracking-tight uppercase font-sans">
+        COTTO <span class="font-display-serif italic text-[#E59838] capitalize">Napoliten</span> KİMDİR?
+      </h2>
+
+      <p class="text-base sm:text-xl text-stone-400 leading-relaxed font-light">
+        İtalyancada "pişmiş, tam kıvamında" ve "geleneksel İtalyan şarküterisi" anlamına gelen <strong>Cotto</strong>; zanaatı modern fırın sistemiyle buluşturan yeni nesil bir İtalyan restoran zinciridir.
+      </p>
+    </div>
+
+    <!-- Story Timeline Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {storySteps.map((step) => (
+        <div class="p-8 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-[#D9381E]/60 hover:bg-white/[0.07] transition-all duration-300 group flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-4xl sm:text-5xl font-black font-mono text-[#E59838] group-hover:scale-110 inline-block transition-transform">
+              {step.num}
+            </span>
+            <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
+              {step.title}
+            </h3>
+            <p class="text-stone-300 text-xs sm:text-sm leading-relaxed font-light">
+              {step.description}
+            </p>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-white/10 flex items-center justify-between text-[11px] text-stone-500 font-bold uppercase tracking-wider">
+            <span>Cotto Büyüme Yolculuğu</span>
+            <span class="text-[#D9381E] opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

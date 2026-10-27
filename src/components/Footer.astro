@@ -1,0 +1,102 @@
+---
+import { branches } from '../data/branches';
+---
+
+<footer class="bg-[#141210] border-t border-stone-800 text-stone-400 text-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+    <!-- Col 1: Brand & Real Logo -->
+    <div class="lg:col-span-2 space-y-4">
+      <div class="flex items-center gap-3">
+        <img
+          src="/images/logo.webp"
+          alt="Cotto Napoliten Logo"
+          class="w-12 h-12 rounded-full object-cover border border-white/20"
+        />
+        <div>
+          <span class="text-white font-black text-lg tracking-wider uppercase">COTTO <span class="font-serif italic text-[#E59838] capitalize">Napoliten</span></span>
+          <span class="block text-[10px] text-stone-500 uppercase tracking-widest font-bold">Pizza & Burger • Franchise</span>
+        </div>
+      </div>
+      <p class="text-stone-400 text-sm leading-relaxed max-w-sm">
+        Samsun Çarşamba’dan Türkiye’ye yayılan yeni nesil İtalyan özel Napoliten fırın pizzeria ve gurme burger zinciri. 72 saat soğuk fermantasyon hamuru ve 450°C özel Napoliten fırın teknolojisi.
+      </p>
+      <div class="pt-2 flex flex-wrap items-center gap-5 text-xs font-bold">
+        <a
+          href="https://www.instagram.com/cotto_napoliten/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-stone-200 hover:text-[#E59838] transition-colors"
+        >
+          Instagram: @cotto_napoliten ↗
+        </a>
+        <a
+          href="https://www.yemeksepeti.com/restaurant/xiok/cotto-cafe-and-restoran-xiok"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[#E59838] hover:underline"
+        >
+          Yemeksepeti Resmi Mağaza ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Col 2: İmza Lezzetler -->
+    <div>
+      <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4 border-l-2 border-[#D9381E] pl-2.5">İmza Menü</h4>
+      <ul class="space-y-2.5 text-sm">
+        <li><a href="/menu/margherita-napoliten-pizza" class="hover:text-[#E59838] transition-colors">Margherita Pizza</a></li>
+        <li><a href="/menu/dort-peynirli-napoliten-pizza" class="hover:text-[#E59838] transition-colors">4 Peynirli Pizza</a></li>
+        <li><a href="/menu/capricciosa-pizza" class="hover:text-[#E59838] transition-colors">Capricciosa Pizza</a></li>
+        <li><a href="/menu/alla-turca-pizza" class="hover:text-[#E59838] transition-colors">Alla Turca Pizza</a></li>
+        <li><a href="/menu/calzone-burger" class="hover:text-[#E59838] transition-colors">Calzone Burger</a></li>
+        <li><a href="/menu/cotto-signature-burger" class="hover:text-[#E59838] transition-colors">Cotto Burger</a></li>
+        <li><a href="/menu" class="text-[#E59838] hover:underline font-bold pt-1 inline-block">Tüm Menüyü Gör →</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Şubelerimiz -->
+    <div>
+      <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4 border-l-2 border-[#D9381E] pl-2.5">Şubeler & Ağımız</h4>
+      <ul class="space-y-2.5 text-sm">
+        {branches.map((b) => (
+          <li>
+            <a href={`/subeler/${b.slug}`} class="hover:text-[#E59838] transition-colors flex items-center justify-between group">
+              <span class="truncate pr-2">{b.name}</span>
+              <span class="text-[10px] text-stone-500 font-mono group-hover:text-[#E59838] shrink-0">{b.city}</span>
+            </a>
+          </li>
+        ))}
+        <li><a href="/subeler" class="text-[#E59838] hover:underline font-bold pt-1 inline-block">Harita & Yol Tarifleri →</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Franchise & Kurumsal -->
+    <div>
+      <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4 border-l-2 border-[#D9381E] pl-2.5">Franchise & Kurumsal</h4>
+      <ul class="space-y-2.5 text-sm">
+        <li><a href="/franchise" class="text-[#E59838] hover:underline font-bold">Franchise Ortaklık Modeli</a></li>
+        <li><a href="/franchise#franchise-calculator" class="hover:text-[#E59838] transition-colors">Yatırım & ROI Hesaplayıcı</a></li>
+        <li><a href="/franchise#concept-models" class="hover:text-[#E59838] transition-colors">3 Mağaza Konsepti</a></li>
+        <li><a href="/franchise#franchise-application-form" class="hover:text-[#E59838] transition-colors">Resmi Bayilik Başvurusu</a></li>
+        <li><a href="/napoliten" class="hover:text-[#E59838] transition-colors">72 Saat Hamur & Fırın Rehberi</a></li>
+        <li><a href="/hakkimizda" class="hover:text-[#E59838] transition-colors">Hakkımızda & Hikayemiz</a></li>
+        <li class="pt-2 text-xs text-stone-400">
+          Merkez & Yatırımcı Hattı:<br />
+          <a href="tel:+905458344090" class="text-[#E59838] font-mono font-bold hover:underline text-sm">0 (545) 834 40 90</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom Legal Strip -->
+  <div class="border-t border-stone-800/80 py-6 bg-[#0D0B0A]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
+      <p>© {new Date().getFullYear()} Cotto Napoliten (Cotto Cafe & Restoran). Tüm hakları saklıdır. Kirazbucağı Mah. Çarşamba / Samsun.</p>
+      <div class="flex items-center gap-6">
+        <a href="/hakkimizda" class="hover:text-stone-300 transition-colors">KVKK & Aydınlatma</a>
+        <a href="/franchise" class="hover:text-stone-300 transition-colors">Yatırımcı İlişkileri</a>
+        <a href="/admin" class="hover:text-[#E59838] text-stone-400 font-bold transition-colors">HQ Franchise CRM Portalı</a>
+      </div>
+    </div>
+  </div>
+</footer>

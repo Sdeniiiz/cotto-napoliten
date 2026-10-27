@@ -1,0 +1,193 @@
+---
+// src/components/FranchiseHomeSection.astro
+// Clean Editorial & Domino's Grid Presentation — No excessive buttons or pill badges
+import { franchiseConceptModels, targetExpansionCities } from '../data/franchise';
+---
+
+<section id="franchise-vitrin" class="py-16 sm:py-24 bg-white border-y border-stone-200/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+
+    <!-- 1. WHY COTTO NAPOLITEN FRANCHISE? -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6 space-y-5">
+        <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-[#D9381E]">
+          YATIRIMCI & FRANCHISE EKOSİSTEMİ
+        </p>
+
+        <h2 class="text-3xl sm:text-5xl font-black text-[#141210] tracking-tight uppercase leading-[1.05]">
+          Usta Bağımlılığı Yok.<br />
+          <span class="font-serif italic text-[#D9381E] capitalize">90 Saniyede Standart Lezzet,</span><br />
+          Yüksek Yatırım Dönüşü.
+        </h2>
+
+        <p class="text-base text-stone-600 leading-relaxed">
+          Geleneksel pizzacıların en büyük sorunu olan "usta kaprisi ve kalite dalgalanmasını" <strong>450°C Özel Napoliten Kubbe Fırın</strong> teknolojimiz ve <strong>72 Saat Soğuk Fermantasyon Merkezi Reçete</strong> sistemimizle ortadan kaldırdık.
+        </p>
+
+        <ul class="space-y-3 pt-2 text-sm text-stone-700">
+          <li class="flex items-start gap-3">
+            <span class="text-[#D9381E] font-black">01.</span>
+            <span><strong>Sıfır Yanık & Sıfır Fire:</strong> Standart ısı ve gramajlı reçeteyle her şubede aynı lezzet kalitesi.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#D9381E] font-black">02.</span>
+            <span><strong>Çift Motorlu Ciro:</strong> Gerçek Napoliten Pizza + Gurme & Calzone Burger ile gün boyu yüksek adisyon.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#D9381E] font-black">03.</span>
+            <span><strong>Sözleşmeli Bölge Koruması:</strong> Yatırım yaptığınız ilçede tüm restoran ve paket servis potansiyeli size aittir.</span>
+          </li>
+        </ul>
+
+        <div class="pt-4 flex items-center gap-6">
+          <a
+            href="/franchise"
+            class="px-7 py-3.5 rounded-xl bg-[#D9381E] hover:bg-[#b82810] text-white font-black text-xs uppercase tracking-wider shadow-md transition-all"
+          >
+            Franchise Dosyasını İncele →
+          </a>
+          <a
+            href="/franchise#franchise-application-form"
+            class="text-sm font-extrabold text-[#141210] hover:text-[#D9381E] underline underline-offset-8 decoration-2"
+          >
+            Başvuru Formuna Git
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Visual: Real Cotto Napoliten Stone Oven Video & Photo -->
+      <div class="lg:col-span-6">
+        <div class="rounded-3xl overflow-hidden bg-[#141210] text-white shadow-xl border border-stone-200">
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              poster="/images/cotto/mekan-tas-firin.jpg"
+              class="w-full h-full object-cover"
+            >
+              <source src="/videos/cotto/tas-firin.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="p-6 sm:p-8 space-y-2">
+            <span class="text-[11px] font-mono text-[#E59838] font-bold uppercase tracking-widest">
+              ÇARŞAMBA MERKEZ ŞUBEMİZDEN GERÇEK GÖRÜNTÜ
+            </span>
+            <h3 class="text-xl sm:text-2xl font-black text-white">
+              Özel Tasarım Cotto Napoliten Fırınımız ve Açık Mutfak Gücü
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">
+              Misafirlerinizin gözü önünde 90 saniyede kabaran leopar benekli Napoliten pizzalar, mekanınızın en güçlü doğal reklamıdır.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. THREE FRANCHISE CONCEPT TIERS (Clean Clickable Cards, No Button Clutter) -->
+    <div class="space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-stone-200 pb-5">
+        <div>
+          <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-[#D9381E]">
+            ESNEK YATIRIM SEÇENEKLERİ
+          </p>
+          <h3 class="text-2xl sm:text-4xl font-black text-[#141210] tracking-tight uppercase mt-1">
+            3 Farklı Franchise Mağaza Modeli
+          </h3>
+        </div>
+        <a href="/franchise#concept-models" class="text-xs font-extrabold uppercase tracking-wider text-[#D9381E] hover:underline">
+          Tüm Teknik Özellikleri Karşılaştır →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-7">
+        {franchiseConceptModels.map((model) => (
+          <a
+            href={`/franchise#concept-models`}
+            class={`group rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-300 ${
+              model.recommended
+                ? 'bg-[#141210] text-white ring-2 ring-[#D9381E] shadow-xl'
+                : 'bg-[#F6F3EE] text-[#141210] border border-stone-200/90 hover:shadow-lg'
+            }`}
+          >
+            <div>
+              <div class="aspect-[16/9] overflow-hidden relative">
+                <img
+                  src={model.image}
+                  alt={model.name}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+
+              <div class="p-6 sm:p-7 space-y-4">
+                <div class="flex items-center justify-between text-xs font-mono font-bold">
+                  <span class="text-[#D9381E] uppercase">{model.badge}</span>
+                  <span class={model.recommended ? 'text-stone-400' : 'text-stone-500'}>{model.areaSqm}</span>
+                </div>
+
+                <h4 class="text-2xl font-black tracking-tight group-hover:text-[#D9381E] transition-colors">
+                  {model.name}
+                </h4>
+
+                <p class={`text-xs sm:text-sm leading-relaxed ${model.recommended ? 'text-stone-300' : 'text-stone-600'}`}>
+                  {model.tagline}
+                </p>
+
+                <div class={`pt-4 border-t space-y-2 text-xs font-mono ${
+                  model.recommended ? 'border-white/10' : 'border-stone-200'
+                }`}>
+                  <div class="flex justify-between">
+                    <span class={model.recommended ? 'text-stone-400' : 'text-stone-500'}>Yatırım Aralığı:</span>
+                    <strong class={model.recommended ? 'text-[#E59838]' : 'text-[#141210]'}>{model.investmentRange}</strong>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class={model.recommended ? 'text-stone-400' : 'text-stone-500'}>Hedef Amortisman:</span>
+                    <strong class="text-emerald-500">{model.targetPaybackMonths}</strong>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class={model.recommended ? 'text-stone-400' : 'text-stone-500'}>Kapasite:</span>
+                    <strong>{model.seatingCapacity}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class={`px-6 sm:px-7 py-4 border-t text-xs font-extrabold uppercase tracking-wider flex items-center justify-between ${
+              model.recommended ? 'border-white/10 text-[#E59838]' : 'border-stone-200 text-[#D9381E]'
+            }`}>
+              <span>Model Detaylarını Gör</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- 3. TARGET EXPANSION CITIES (Clean Text List, Not Button Pills) -->
+    <div class="p-7 sm:p-10 rounded-3xl bg-[#141210] text-white grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-5 space-y-2">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-[#E59838]">
+          2026 TÜRKİYE BÜYÜME HARİTASI
+        </span>
+        <h3 class="text-2xl sm:text-3xl font-black text-white">
+          Öncelikli Franchise Verilecek Şehirler
+        </h3>
+        <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">
+          Samsun Merkez, Atakum, İstanbul, Ankara, Trabzon, Ordu, İzmir, Bursa ve Antalya başta olmak üzere bölge korumalı bayilikler tahsis ediyoruz.
+        </p>
+      </div>
+
+      <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8">
+        {targetExpansionCities.map((c) => (
+          <div>
+            <div class="font-bold text-sm text-white">{c.city}</div>
+            <div class="text-[11px] text-[#E59838] font-mono">{c.availableQuota} Şube Kontenjanı</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+// src/pages/napoliten/index.astro
+import Layout from '../../layouts/Layout.astro';
+import { articles } from '../../data/articles';
+---
+
+<Layout
+  title="Napoliten Zanaatı & Franchise Rehberi | Cotto Napoliten Blog"
+  description="72 saat soğuk fermantasyon Napoliten pizza hamuru, 450°C Fornero özel Napoliten fırın teknolojisi ve Türkiye'de özel Napoliten fırın pizza franchise yatırımı rehberleri."
+>
+  <section class="pt-28 pb-16 md:pt-36 md:pb-20 bg-[#12100E] text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="text-cotto-gold text-xs font-extrabold uppercase tracking-[0.2em] block mb-3">
+        GASTRONOMİ KÜLTÜRÜ & YATIRIMCI KILAVUZU
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold tracking-tight mb-4">
+        Napoliten <span class="italic font-normal text-cotto-gold">Ansiklopedisi</span>
+      </h1>
+      <p class="text-white/75 text-base sm:text-lg font-light">
+        Gerçek Napoliten pizzanın bilimsel sırları, Fornero özel Napoliten fırın mühendisliği ve karlı restoran yatırımı üzerine uzman makalelerimiz.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-14 md:py-24 bg-[#FBF8F3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {articles.map((article, idx) => {
+          const images = ['/images/cotto/01_Margherita_Pizza.jpg', '/images/cotto/mekan-tas-firin.jpg', '/images/cotto/03_4_Peynirli_Pizza.jpg'];
+          const img = images[idx % images.length];
+          return (
+            <a
+              href={`/napoliten/${article.slug}`}
+              class="group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div class="aspect-[16/10] overflow-hidden bg-stone-900 relative">
+                  <img
+                    src={img}
+                    alt={article.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="p-6">
+                  <div class="text-xs text-[#D9381E] font-bold uppercase tracking-wider mb-2">
+                    {article.category} • {article.readTime}
+                  </div>
+                  <h2 class="font-serif font-bold text-xl text-cotto-dark group-hover:text-cotto-red transition-colors mb-3">
+                    {article.title}
+                  </h2>
+                  <p class="text-cotto-muted text-sm leading-relaxed line-clamp-3">
+                    {article.excerpt}
+                  </p>
+                </div>
+              </div>
+              <div class="px-6 pb-6 pt-2 text-xs font-extrabold text-cotto-red">
+                Makaleyi Oku →
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</Layout>

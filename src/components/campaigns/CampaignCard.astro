@@ -1,0 +1,45 @@
+---
+// src/components/campaigns/CampaignCard.astro
+import type { Campaign } from '../../types/campaign';
+
+interface Props {
+  campaign: Campaign;
+}
+
+const { campaign } = Astro.props;
+---
+
+<div class="bg-white rounded-2xl overflow-hidden border border-stone-200/90 hover:border-[#D9381E] shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col">
+  <div class="aspect-[16/10] relative overflow-hidden bg-stone-900">
+    <img
+      src={campaign.image || '/images/cotto/10_2li_Pizza_Menu.jpg'}
+      alt={campaign.title}
+      class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="p-5 flex-1 flex flex-col justify-between">
+    <div>
+      {campaign.badge && (
+        <span class="text-[11px] font-extrabold uppercase tracking-wider text-[#D9381E] block mb-1">
+          {campaign.badge}
+        </span>
+      )}
+      <h3 class="font-black text-lg text-[#141210] uppercase mb-1.5">{campaign.title}</h3>
+      <p class="text-stone-600 text-xs sm:text-sm leading-relaxed mb-4">{campaign.description}</p>
+    </div>
+
+    <div class="flex items-center justify-between pt-3 border-t border-stone-100">
+      <span class="text-[11px] font-bold text-stone-500">Şube & Paket Menü</span>
+      <a
+        href="https://www.yemeksepeti.com/restaurant/xiok/cotto-cafe-and-restoran-xiok"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs font-extrabold text-[#D9381E] hover:text-[#141210] transition-colors"
+      >
+        Yemeksepeti'nde Gör ↗
+      </a>
+    </div>
+  </div>
+</div>

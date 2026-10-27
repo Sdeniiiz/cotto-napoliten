@@ -1,0 +1,36 @@
+---
+// src/components/branches/BranchOrderCTA.astro
+import type { BranchAggregate } from '../../types/branch';
+
+interface Props {
+  branch: BranchAggregate;
+}
+
+const { branch } = Astro.props;
+const ysUrl = branch.orderSettings?.externalDeliveryPartners?.yemeksepetiUrl || 'https://www.yemeksepeti.com/restaurant/xiok/cotto-cafe-and-restoran-xiok';
+---
+
+<div class="bg-[#141210] text-white rounded-3xl p-6 sm:p-8 border-2 border-[#D9381E]/40 shadow-xl">
+  <span class="text-[11px] font-black uppercase tracking-widest text-[#E59838] block mb-1">MARKA DENEYİMİ & FRANCHISE</span>
+  <h3 class="text-2xl font-black uppercase tracking-tight mb-2">{branch.name}</h3>
+  <p class="text-white/75 text-sm mb-6">
+    450°C Fornero özel Napoliten fırın Napoliten lezzetlerimizi Yemeksepeti üzerinden inceleyebilir veya benzer bir şube yatırımı için Franchise ekibimizle görüşebilirsiniz.
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <a
+      href="/franchise#franchise-application-form"
+      class="px-5 py-3.5 rounded-xl bg-[#D9381E] hover:bg-[#b82810] text-white font-black text-xs uppercase tracking-wider text-center transition-all shadow-lg"
+    >
+      💼 Benzer Şube İçin Bayilik Al →
+    </a>
+    <a
+      href={ysUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="px-5 py-3.5 rounded-xl bg-[#FA0050] hover:bg-[#d90045] text-white font-black text-xs uppercase tracking-wider text-center transition-all shadow-lg"
+    >
+      🛵 Yemeksepeti'nde Gör ↗
+    </a>
+  </div>
+</div>

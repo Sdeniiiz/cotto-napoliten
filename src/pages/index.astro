@@ -1,0 +1,41 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import MenuSection from '../components/MenuSection.astro';
+import BrandIntro from '../components/BrandIntro.astro';
+import SignatureDishes from '../components/SignatureDishes.astro';
+import FranchiseHomeSection from '../components/FranchiseHomeSection.astro';
+import FranchiseCalculator from '../components/FranchiseCalculator.astro';
+import RestaurantExperience from '../components/RestaurantExperience.astro';
+import BranchFinder from '../components/BranchFinder.astro';
+import OnlineOrderSection from '../components/OnlineOrderSection.astro';
+import SocialCommunitySection from '../components/SocialCommunitySection.astro';
+---
+
+<Layout
+  title="Cotto Napoliten | Napoliten Pizza, Gurme Burger & Franchise"
+  description="450°C Özel Napoliten Kubbe Fırında 90 saniyede pişen 72 saat soğuk fermantasyonlu gerçek Napoliten pizza ve gurme burger zinciri. Türkiye geneli yüksek kârlı franchise fırsatları."
+>
+  <!-- 1. Domino's TR Style Bento Hero (Brand & Franchise Showcase) -->
+  <Hero />
+
+  <!-- 2. Domino's Style Boxed Product Catalog Grid (Moved up before Franchise) -->
+  <MenuSection />
+
+  <!-- 3. Brand Craft & Signature Dishes -->
+  <BrandIntro />
+  <SignatureDishes />
+
+  <!-- 4. Franchise Powerhouse & 3 Store Concept Models (Moved lower on homepage) -->
+  <FranchiseHomeSection />
+
+  <!-- 5. Interactive Franchise ROI & Investment Simulator -->
+  <FranchiseCalculator />
+
+  <!-- 6. Store Architecture, Branches & Yemeksepeti Official Link Banner -->
+  <RestaurantExperience />
+  <BranchFinder />
+  <OnlineOrderSection />
+  <SocialCommunitySection />
+</Layout>

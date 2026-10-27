@@ -1,0 +1,21 @@
+---
+// src/pages/404.astro
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Sayfa Bulunamadı (404) | Cotto Napoliten">
+  <section class="min-h-[75vh] pt-32 pb-20 bg-[#12100E] text-white flex items-center justify-center text-center px-4">
+    <div class="max-w-lg space-y-6">
+      <span class="text-cotto-gold font-serif font-extrabold text-7xl block">404</span>
+      <h1 class="text-3xl sm:text-4xl font-serif font-extrabold">Aradığınız Dilim Fırından Uçmuş Olabilir!</h1>
+      <p class="text-white/70 text-sm sm:text-base">
+        Aradığınız sayfa taşınmış veya kaldırılmış olabilir. Sıcak özel Napoliten fırın Napoliten menümüze veya Franchise portalımıza aşağıdan ulaşabilirsiniz.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 pt-2">
+        <a href="/" class="px-6 py-3.5 rounded-full bg-cotto-red text-white font-bold text-sm">Ana Sayfaya Dön</a>
+        <a href="/menu" class="px-6 py-3.5 rounded-full bg-white/10 text-white font-bold text-sm">Menüyü İncele</a>
+        <a href="/franchise" class="px-6 py-3.5 rounded-full bg-cotto-gold text-cotto-dark font-bold text-sm">Franchise Portalı</a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,74 @@
+---
+// src/components/ProductCard.astro
+// Clean clickable horizontal card with real Cotto Napoliten images and zero inner buttons
+interface Props {
+  name: string;
+  description: string;
+  price: number | string;
+  image: string;
+  isPopular?: boolean;
+  isNew?: boolean;
+  badge?: string;
+  calories?: number | string;
+  prepTime?: number | string;
+  slug?: string;
+  category?: string;
+}
+
+const {
+  name,
+  description,
+  price,
+  image,
+  calories,
+  prepTime,
+  slug,
+  category
+} = Astro.props;
+
+const formattedPrice = typeof price === 'number' ? `${price} ₺` : price;
+const formattedCalories = typeof calories === 'number' ? `${calories} kcal` : calories;
+const formattedPrep = typeof prepTime === 'number' ? `${prepTime} dk` : prepTime;
+---
+
+<a
+  href={slug ? `/menu/${slug}` : '#'}
+  class="group bg-white rounded-2xl p-4 border border-stone-200/90 shadow-xs hover:shadow-lg hover:border-[#D9381E] transition-all duration-300 flex gap-4 items-center"
+  data-category={category}
+>
+  <!-- Image Thumbnail -->
+  <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden shrink-0 bg-stone-100">
+    <img
+      src={image}
+      alt={name}
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Content -->
+  <div class="flex-1 min-w-0">
+    <div class="flex items-start justify-between gap-2 mb-1">
+      <h3 class="font-black text-base sm:text-lg text-[#141210] group-hover:text-[#D9381E] transition-colors truncate">
+        {name}
+      </h3>
+      <span class="font-mono font-black text-base sm:text-lg text-[#D9381E] shrink-0">
+        {formattedPrice}
+      </span>
+    </div>
+
+    <p class="text-xs sm:text-sm text-stone-600 line-clamp-2 leading-relaxed mb-2">
+      {description}
+    </p>
+
+    <div class="flex items-center justify-between text-[11px] text-stone-400 font-medium">
+      <span>
+        {formattedPrep ? `450°C Özel Napoliten Fırın • ${formattedPrep}` : '450°C Özel Napoliten Fırın'}
+        {formattedCalories ? ` • ${formattedCalories}` : ''}
+      </span>
+      <span class="text-[#D9381E] font-bold group-hover:translate-x-0.5 transition-transform">
+        Detay →
+      </span>
+    </div>
+  </div>
+</a>

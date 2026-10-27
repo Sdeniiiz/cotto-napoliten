@@ -1,0 +1,158 @@
+---
+// src/components/Header.astro
+// Clean, refined header with real Cotto Napoliten logo, plain text nav links, and a single primary CTA
+interface Props {
+  activePath?: string;
+}
+
+const { activePath = '/' } = Astro.props;
+
+const navLinks = [
+  { name: 'Franchise & Bayilik', href: '/franchise' },
+  { name: 'Menü & Lezzetler', href: '/menu' },
+  { name: 'Napoliten Zanaatı', href: '/napoliten' },
+  { name: 'Şubelerimiz', href: '/subeler' },
+  { name: 'Hakkımızda', href: '/hakkimizda' },
+  { name: 'İletişim', href: '/iletisim' },
+];
+---
+
+<header id="site-header" class="sticky top-0 z-50 w-full bg-[#D9381E] text-white shadow-md">
+  <!-- Subtle Top Info Strip (Plain Text, No Buttons) -->
+  <div class="bg-[#141210] text-stone-300 text-[11px] py-1.5 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <p class="truncate">
+        <span class="text-[#E59838] font-bold">COTTO NAPOLİTEN</span> — 72 Saat Soğuk Fermantasyon Napoliten Pizza & Gurme Burger • Türkiye Geneli Franchise
+      </p>
+      <div class="flex items-center gap-4 shrink-0">
+        <a href="tel:+905458344090" class="font-mono font-bold text-white hover:text-[#E59838] transition-colors">
+          0 (545) 834 40 90
+        </a>
+        <span class="hidden sm:inline text-white/20">|</span>
+        <a
+          href="https://www.yemeksepeti.com/restaurant/xiok/cotto-cafe-and-restoran-xiok"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden sm:inline font-bold text-[#E59838] hover:underline"
+        >
+          Yemeksepeti Mağazamız ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header Bar -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-6">
+
+    <!-- Real Cotto Napoliten Logo -->
+    <a href="/" class="flex items-center gap-3 group shrink-0" aria-label="Cotto Napoliten Ana Sayfa">
+      <img
+        src="/images/logo.webp"
+        alt="Cotto Napoliten Pizza & Burger Logo"
+        class="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-white/30 shadow-md group-hover:scale-105 transition-transform bg-[#141210]"
+      />
+      <div class="flex flex-col">
+        <div class="flex items-baseline gap-1.5">
+          <span class="font-black text-xl sm:text-2xl tracking-tight text-white uppercase leading-none">COTTO</span>
+          <span class="font-serif italic font-bold text-lg sm:text-xl text-[#FFE0B2] leading-none">Napoliten</span>
+        </div>
+        <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-white/80 mt-1">
+          PİZZA & GURME BURGER
+        </span>
+      </div>
+    </a>
+
+    <!-- Clean Typographic Navigation Links (Not Button Boxes) -->
+    <nav class="hidden lg:flex items-center gap-7" aria-label="Ana Menü">
+      {navLinks.map((link) => {
+        const isActive = activePath === link.href || (link.href !== '/' && activePath.startsWith(link.href));
+        return (
+          <a
+            href={link.href}
+            class={`text-sm font-bold tracking-wide transition-colors relative py-1 ${
+              isActive
+                ? 'text-[#FFE0B2] underline underline-offset-8 decoration-2 decoration-[#FFE0B2]'
+                : 'text-white/90 hover:text-[#FFE0B2]'
+            }`}
+          >
+            {link.name}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Single Primary CTA Button on the Right -->
+    <div class="hidden sm:flex items-center gap-5 shrink-0">
+      <a
+        href="/franchise#franchise-application-form"
+        class="px-5 py-2.5 rounded-xl bg-[#141210] hover:bg-stone-900 text-white font-extrabold text-xs uppercase tracking-wider shadow-md transition-all"
+      >
+        Franchise Başvurusu →
+      </a>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="flex items-center lg:hidden gap-3">
+      <a
+        href="/franchise"
+        class="text-xs font-extrabold uppercase tracking-wider text-[#FFE0B2] underline underline-offset-4"
+      >
+        Franchise
+      </a>
+      <button
+        type="button"
+        id="mobile-menu-button"
+        class="p-2 text-white focus:outline-none cursor-pointer"
+        aria-label="Menüyü Aç"
+        aria-expanded="false"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+          <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-[#141210] text-white border-t border-white/10 px-6 py-5 space-y-3 shadow-2xl">
+    <div class="flex flex-col divide-y divide-white/10">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="py-3 text-sm font-bold text-stone-200 hover:text-[#E59838] flex items-center justify-between"
+        >
+          <span>{link.name}</span>
+          <span class="text-white/40">→</span>
+        </a>
+      ))}
+      <a
+        href="https://www.yemeksepeti.com/restaurant/xiok/cotto-cafe-and-restoran-xiok"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="py-3 text-sm font-bold text-[#E59838] flex items-center justify-between"
+      >
+        <span>Yemeksepeti Resmi Mağazamız</span>
+        <span>↗</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileBtn = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    mobileBtn?.addEventListener('click', () => {
+      const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+      mobileBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+      mobileMenu?.classList.toggle('hidden');
+      menuIcon?.classList.toggle('hidden');
+      closeIcon?.classList.toggle('hidden');
+    });
+  });
+</script>

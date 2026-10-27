@@ -1,0 +1,77 @@
+---
+// src/components/SocialCommunitySection.astro
+// Uses 100% real Cotto Napoliten images from Desktop folder
+const socialPosts = [
+  {
+    image: "/images/cotto/01_Margherita_Pizza.jpg",
+    handle: "@cotto_napoliten",
+    caption: "450°C özel Napoliten fırından yeni çıktı: 72 saat dinlenmiş Napoliten hamuru ve taze mozzarella!"
+  },
+  {
+    image: "/images/cotto/04_Capricciosa_Pizza.jpg",
+    handle: "@cotto_napoliten",
+    caption: "Dana füme et, taze mantar ve eriyen mozzarellasıyla Capricciosa Pizza."
+  },
+  {
+    image: "/images/cotto/11_Calzone_Burger.jpg",
+    handle: "@cotto_napoliten",
+    caption: "Napoliten pizza hamuruna sarılıp özel Napoliten fırında kızaran efsane Calzone Burger deneyimi!"
+  },
+  {
+    image: "/images/cotto/mekan-tas-firin.jpg",
+    handle: "@cotto_napoliten",
+    caption: "Kirazbucağı Çarşamba şubemizde her gün özel Napoliten fırın ateşi yanıyor. Sizi de bekliyoruz!"
+  }
+];
+---
+
+<section class="py-16 md:py-24 bg-[#F6F3EE] border-t border-stone-200/70">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
+      <div>
+        <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-[#D9381E] mb-2">
+          INSTAGRAM TOPLULUĞUMUZ
+        </p>
+        <h2 class="text-3xl sm:text-4xl font-black text-[#141210] tracking-tight uppercase">
+          @cotto_napoliten <span class="font-serif italic text-[#D9381E] lowercase">Vitrinimiz</span>
+        </h2>
+      </div>
+      <a
+        href="https://www.instagram.com/cotto_napoliten/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs font-extrabold uppercase tracking-wider text-[#D9381E] hover:underline"
+      >
+        Instagram'da Takip Et (@cotto_napoliten) ↗
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {socialPosts.map((post) => (
+        <a
+          href="https://www.instagram.com/cotto_napoliten/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#141210] shadow-sm hover:shadow-xl transition-all duration-500 block"
+        >
+          <img
+            src={post.image}
+            alt={post.caption}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <span class="text-[11px] font-bold text-[#E59838] block mb-1">{post.handle}</span>
+            <p class="text-xs text-white/90 line-clamp-2 leading-relaxed">
+              {post.caption}
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,49 @@
+---
+// src/components/WhyBox.astro
+const features = [
+  {
+    badge: "01 • FERMANTASYON",
+    title: "72 Saat Soğuk Fermantasyon",
+    description: "İtalyan Tip 00 unu ve yüksek su oranıyla yoğrulan hamurumuz +4°C'de 72 saat dinlendirilir. Midede ağırlık yapmayan, dışı çıtır içi bulut gibi Napoliten dokusu böyle doğar."
+  },
+  {
+    badge: "02 • FORNERO ÖZEL NAPOLİTEN FIRIN",
+    title: "450°C Döner Özel Kubbe Fırında 90 Saniye",
+    description: "Özel Fornero hibrit özel Napoliten fırınımızda 450°C'de tam 90 saniyede pişer. Leopar benekli kenarlar (cornicione) oluşurken malzemelerin besin değeri ve sululuğu hapsolur."
+  },
+  {
+    badge: "03 • TERMAL KUTU",
+    title: "Buhar Tahliyeli Özel Kraft Kutu",
+    description: "Pizzanın hamurunu yumuşatan nemi dışarı atan mikro hava kanallı özel Cotto kutularımızla özel Napoliten fırın lezzeti evinize ilk çıktığı sıcaklıkla ulaşır."
+  }
+];
+---
+
+<section class="py-14 md:py-24 bg-[#12100E] text-white relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+      <span class="text-cotto-gold text-xs font-extrabold uppercase tracking-[0.2em] block mb-3">
+        NAPOLİTEN ZANAATI & TEKNOLOJİ
+      </span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-extrabold tracking-tight">
+        Neden <span class="text-cotto-gold italic font-normal">Cotto Napoliten?</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+      {features.map((f) => (
+        <div class="bg-[#1C1814] border border-white/10 rounded-3xl p-7 md:p-8 hover:border-cotto-gold/40 transition-all">
+          <p class="text-[11px] font-extrabold tracking-widest uppercase text-cotto-gold mb-3">
+            {f.badge}
+          </p>
+          <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-3">
+            {f.title}
+          </h3>
+          <p class="text-white/70 text-sm leading-relaxed">
+            {f.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,103 @@
+---
+// src/pages/menu/index.astro
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import WhyBox from '../../components/WhyBox.astro';
+import { getAllProducts, getAllCategories } from '../../services/productService';
+
+const products = getAllProducts();
+const categories = getAllCategories();
+---
+
+<Layout
+  title="Menümüz | 450°C Özel Napoliten Fırın Napoliten Pizza & Gurme Burger | Cotto Napoliten"
+  description="Cotto Napoliten menüsü: Margherita, Ricotta Margherita, 4 Peynirli, Capricciosa, Pepperoni, Alla Turca, Pizza Bari, Calzone Burger, Gurme Brioche Burgerler ve Avantajlı Menüler."
+>
+  <section class="pt-20 pb-12 md:pt-28 md:pb-16 bg-[#12100E] text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <span class="text-cotto-gold text-xs font-extrabold uppercase tracking-[0.2em] block mb-3">
+        72 SAAT SOĞUK FERMANTASYON • 450°C FORNERO ÖZEL NAPOLİTEN FIRIN
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold tracking-tight mb-4">
+        Zanaatkar <span class="italic font-normal text-cotto-gold">Lezzet Menümüz</span>
+      </h1>
+      <p class="text-white/75 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        San Marzano domates sosu, taze suda mozzarella, leopar benekli özel Napoliten fırın Napoliten pizzalarımız ve el yapımı tereyağlı brioche ile Calzone burgerlerimiz.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12 md:py-16 bg-[#FBF8F3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Clean Text Category Tabs -->
+      <div class="flex flex-wrap items-center justify-center gap-6 border-b border-stone-200 mb-10">
+        <button
+          type="button"
+          data-filter="ALL"
+          class="menu-page-filter active pb-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider border-b-2 border-[#D9381E] text-[#D9381E] transition-colors cursor-pointer"
+        >
+          Tüm Menü ({products.length})
+        </button>
+        {categories.map((cat) => (
+          <button
+            type="button"
+            data-filter={cat.id}
+            class="menu-page-filter pb-3 text-xs sm:text-sm font-bold uppercase tracking-wider border-b-2 border-transparent text-stone-500 hover:text-[#141210] transition-colors cursor-pointer"
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+
+      <!-- Product Grid (4 Columns like Domino's Showcase) -->
+      <div id="menu-page-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {products.map((item) => (
+          <ProductCard
+            name={item.name}
+            description={item.shortDescription || item.description}
+            price={item.price}
+            image={item.image}
+            isPopular={item.isPopular}
+            badge={item.badge}
+            calories={item.calories}
+            prepTime={item.prepTimeMinutes}
+            slug={item.slug}
+            category={item.category}
+          />
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <WhyBox />
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.menu-page-filter');
+    const cards = document.querySelectorAll('#menu-page-grid > *[data-category]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        buttons.forEach((b) => {
+          b.classList.remove('border-[#D9381E]', 'text-[#D9381E]', 'font-extrabold');
+          b.classList.add('border-transparent', 'text-stone-500', 'font-bold');
+        });
+        btn.classList.remove('border-transparent', 'text-stone-500', 'font-bold');
+        btn.classList.add('border-[#D9381E]', 'text-[#D9381E]', 'font-extrabold');
+
+        cards.forEach((card) => {
+          const cat = card.getAttribute('data-category');
+          if (filter === 'ALL' || cat === filter) {
+            (card as HTMLElement).style.display = '';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

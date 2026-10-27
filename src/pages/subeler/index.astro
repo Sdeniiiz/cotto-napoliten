@@ -1,0 +1,68 @@
+---
+// src/pages/subeler/index.astro
+import Layout from '../../layouts/Layout.astro';
+import { getAllBranches } from '../../services/branchService';
+
+const branches = getAllBranches();
+---
+
+<Layout
+  title="Şubelerimiz & Büyüme Haritamız | Cotto Napoliten"
+  description="Cotto Napoliten Çarşamba Merkez Flagship şubemiz ve Türkiye genelinde açılacak yeni özel Napoliten fırın Napoliten pizza & burger noktalarımız."
+>
+  <section class="pt-28 pb-16 md:pt-36 md:pb-20 bg-[#12100E] text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-cotto-gold text-xs font-extrabold uppercase tracking-[0.2em] block mb-3">
+        ÇARŞAMBA MERKEZ & TÜRKİYE BÜYÜME AĞI
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold tracking-tight mb-4">
+        Cotto Napoliten <span class="italic font-normal text-cotto-gold">Şubeleri</span>
+      </h1>
+      <p class="text-white/75 text-base sm:text-lg max-w-2xl mx-auto font-light">
+        450°C Fornero özel Napoliten fırın ateşinin yandığı restoranlarımızı ziyaret edin veya şehrinizdeki ilk Cotto Napoliten franchise yatırımcısı olun.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-14 md:py-24 bg-[#FBF8F3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        {branches.map((branch) => {
+          const isActive = branch.entity?.status === 'active';
+          return (
+            <a
+              href={`/subeler/${branch.slug}`}
+              class="group bg-white rounded-3xl overflow-hidden border border-stone-200/90 hover:border-cotto-red shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div class="h-52 relative overflow-hidden bg-stone-900">
+                  <img
+                    src={branch.image || '/images/cotto/mekan-ic-salon.jpg'}
+                    alt={branch.name}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-4 left-5 right-5 text-white">
+                    <span class="text-xs text-cotto-gold font-bold uppercase tracking-wider">{branch.city} / {branch.district} • {isActive ? 'Aktif Restoran' : 'Franchise Tahsis'}</span>
+                    <h2 class="text-xl font-serif font-extrabold">{branch.name}</h2>
+                  </div>
+                </div>
+
+                <div class="p-6 space-y-3">
+                  <p class="text-xs sm:text-sm text-cotto-muted leading-relaxed">
+                    {branch.address}
+                  </p>
+                  <div class="flex items-center justify-between text-xs font-bold text-cotto-dark pt-2 border-t border-stone-100">
+                    <span>{branch.workingHours.weekdays}</span>
+                    <span class="text-cotto-red group-hover:translate-x-0.5 transition-transform">Şube Detayı →</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</Layout>

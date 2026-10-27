@@ -1,0 +1,607 @@
+---
+// src/pages/franchise.astro
+import Layout from '../layouts/Layout.astro';
+import FranchiseCalculator from '../components/FranchiseCalculator.astro';
+import {
+  franchiseModels,
+  franchiseAdvantages,
+  franchiseSteps,
+  franchiseFAQs,
+  unitEconomics,
+  targetExpansionCities
+} from '../data/franchise';
+---
+
+<Layout
+  title="Franchise & Yatırımcı Portalı | Cotto Napoliten Özel Napoliten Fırın Pizza & Burger"
+  description="Cotto Napoliten ile yüksek karlı özel Napoliten fırın Napoliten pizza ve gurme burger franchise yatırımı. Usta bağımsız Fornero döner özel Napoliten fırın teknolojisi, %28-34 net FAVÖK ve 11-16 ay amortisman."
+>
+  <!-- 1. INVESTOR HERO -->
+  <section class="relative pt-24 pb-18 md:pt-32 md:pb-24 bg-[#12100E] text-white overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <video
+        src="/videos/cotto/tas-firin.mp4"
+        poster="/images/cotto/mekan-tas-firin.jpg"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="w-full h-full object-cover opacity-35"
+      ></video>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#12100E] via-[#12100E]/90 to-[#12100E]/65"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#12100E] via-transparent to-transparent"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <p class="text-cotto-gold text-xs font-extrabold tracking-[0.2em] uppercase">
+            2026 FRANCHISE BÜYÜME PROGRAMI • BÖLGE KORUMALI TAHSİS
+          </p>
+
+          <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-extrabold tracking-tight leading-[1.08]">
+            Usta Bağımlılığını Bitiren <br />
+            <span class="text-cotto-gold italic font-normal">Napoliten Özel Napoliten Fırın</span> Yatırımı.
+          </h1>
+
+          <p class="text-white/80 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
+            Geleneksel pizzacıların en büyük sorunu olan "usta kaprisi" ve "yüksek fire" problemini <strong class="text-white font-semibold">450°C Fornero Hibrit Döner Özel Napoliten Fırın</strong> ve <strong class="text-white font-semibold">72 saatlik merkezi soğuk fermantasyon reçetesi</strong> ile çözdük. Yanına eklediğimiz <strong class="text-cotto-gold font-semibold">Gurme & Calzone Burger</strong> hattıyla tek mutfakta çift vardiya ciro üretiyoruz.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-6 pt-2">
+            <a
+              href="#franchise-application-form"
+              class="px-7 py-3.5 rounded-xl bg-cotto-red hover:bg-cotto-red-dark text-white font-bold text-sm shadow-lg transition-all flex items-center gap-2"
+            >
+              <span>Yatırımcı Başvurusu Yap</span>
+              <span>→</span>
+            </a>
+            <a
+              href="#franchise-calculator"
+              class="text-sm font-bold text-cotto-gold hover:text-white underline underline-offset-4 transition-colors"
+            >
+              ROI & Kârlılık Simülatörüne Git ↓
+            </a>
+          </div>
+        </div>
+
+        <!-- Investor Quick Scorecard -->
+        <div class="lg:col-span-5">
+          <div class="bg-[#1C1814]/95 backdrop-blur-xl border border-white/15 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+              <div>
+                <span class="text-[11px] font-extrabold uppercase tracking-widest text-cotto-gold block">YATIRIMCI ÖZET KARTI</span>
+                <h2 class="font-serif font-bold text-xl text-white">Finansal & Operasyonel Parametreler</h2>
+              </div>
+              <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold px-3 py-1 rounded-full">
+                2026 Verileri
+              </span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3.5">
+              <div class="bg-black/40 p-4 rounded-2xl border border-white/5">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-white/50 mb-1">Başlangıç Yatırımı</div>
+                <div class="text-xl sm:text-2xl font-serif font-extrabold text-white">₺1.45M'dan</div>
+                <div class="text-[11px] text-cotto-gold font-semibold mt-0.5">Express / Bistro / Lounge</div>
+              </div>
+              <div class="bg-black/40 p-4 rounded-2xl border border-white/5">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-white/50 mb-1">Hedef Net FAVÖK</div>
+                <div class="text-xl sm:text-2xl font-serif font-extrabold text-emerald-400">%26 – %34</div>
+                <div class="text-[11px] text-white/60 font-medium mt-0.5">Sektör ortalamasının 2 katı</div>
+              </div>
+              <div class="bg-black/40 p-4 rounded-2xl border border-white/5">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-white/50 mb-1">Yatırım Geri Dönüşü</div>
+                <div class="text-xl sm:text-2xl font-serif font-extrabold text-cotto-gold">11 – 16 Ay</div>
+                <div class="text-[11px] text-white/60 font-medium mt-0.5">Lokasyon & konsepte göre</div>
+              </div>
+              <div class="bg-black/40 p-4 rounded-2xl border border-white/5">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-white/50 mb-1">Pişirme Süresi</div>
+                <div class="text-xl sm:text-2xl font-serif font-extrabold text-white">90 Saniye</div>
+                <div class="text-[11px] text-cotto-red font-semibold mt-0.5">450°C Fornero Özel Napoliten Fırın</div>
+              </div>
+            </div>
+
+            <div class="bg-cotto-red/15 border border-cotto-red/30 rounded-2xl p-4 flex items-center justify-between gap-3">
+              <div>
+                <div class="text-xs font-extrabold text-white">Doğrudan Yatırımcı Hattı</div>
+                <div class="text-xs text-white/75">Bölge tahsisi için yönetim kurulumuzla görüşün</div>
+              </div>
+              <a
+                href="https://wa.me/905458344090?text=Merhaba%20Cotto%20Napoliten,%20Franchise%20yat%C4%B1r%C4%B1m%C4%B1%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5b] text-white text-xs font-extrabold shrink-0 transition-all shadow-md"
+              >
+                💬 WhatsApp VIP
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 3 FRANCHISE STORE CONCEPT MODELS -->
+  <section id="concept-models" class="py-16 md:py-28 bg-[#FBF8F3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-cotto-red text-xs font-extrabold uppercase tracking-[0.2em] block mb-3">
+          ESNEK YATIRIM ALTERNATİFLERİ
+        </span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-extrabold text-cotto-dark tracking-tight mb-4">
+          Bütçenize ve Lokasyonunuza Uygun <span class="italic font-normal text-cotto-red">3 Mağaza Konsepti</span>
+        </h2>
+        <p class="text-cotto-muted text-base sm:text-lg leading-relaxed">
+          Yüksek paket servis odaklı AVM/cadde noktasından, geniş bahçeli amiral gemisi İtalyan gastro-lounge restoranına kadar doğrulanmış 3 iş modeli sunuyoruz.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        {franchiseModels.map((model) => (
+          <div class={`rounded-[2.25rem] overflow-hidden flex flex-col justify-between transition-all duration-300 ${model.isPopular ? 'bg-[#12100E] text-white border-2 border-cotto-gold shadow-2xl lg:-translate-y-3' : 'bg-white text-cotto-dark border border-stone-200/90 shadow-lg'}`}>
+            <div>
+              <!-- Image Header -->
+              <div class="h-52 relative overflow-hidden">
+                <img src={model.image} alt={model.name} class="w-full h-full object-cover" loading="lazy" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <span class={`absolute top-4 left-4 text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1.5 rounded-full ${model.isPopular ? 'bg-cotto-gold text-cotto-dark' : 'bg-cotto-red text-white'}`}>
+                  {model.badge}
+                </span>
+                <div class="absolute bottom-4 left-5 right-5 text-white">
+                  <div class="text-xs font-semibold text-white/75">{model.tagline}</div>
+                  <h3 class="text-2xl font-serif font-extrabold">{model.name}</h3>
+                </div>
+              </div>
+
+              <!-- Specs Grid -->
+              <div class="p-6 sm:p-7">
+                <div class={`grid grid-cols-2 gap-3 p-4 rounded-2xl mb-6 ${model.isPopular ? 'bg-white/5 border border-white/10' : 'bg-stone-50 border border-stone-200/70'}`}>
+                  <div>
+                    <span class={`text-[10px] font-bold uppercase tracking-wider block ${model.isPopular ? 'text-white/50' : 'text-stone-400'}`}>Yatırım Bütçesi</span>
+                    <span class={`font-serif font-extrabold text-base ${model.isPopular ? 'text-cotto-gold' : 'text-cotto-red'}`}>{model.investmentRange}</span>
+                  </div>
+                  <div>
+                    <span class={`text-[10px] font-bold uppercase tracking-wider block ${model.isPopular ? 'text-white/50' : 'text-stone-400'}`}>Aylık Ciro Hedefi</span>
+                    <span class="font-serif font-extrabold text-base">{model.monthlyRevenueTarget}</span>
+                  </div>
+                  <div>
+                    <span class={`text-[10px] font-bold uppercase tracking-wider block ${model.isPopular ? 'text-white/50' : 'text-stone-400'}`}>Net Kar Marjı</span>
+                    <span class="font-extrabold text-sm text-emerald-500">{model.netProfitMargin}</span>
+                  </div>
+                  <div>
+                    <span class={`text-[10px] font-bold uppercase tracking-wider block ${model.isPopular ? 'text-white/50' : 'text-stone-400'}`}>Geri Dönüş (ROI)</span>
+                    <span class="font-extrabold text-sm">{model.roiMonths}</span>
+                  </div>
+                  <div>
+                    <span class={`text-[10px] font-bold uppercase tracking-wider block ${model.isPopular ? 'text-white/50' : 'text-stone-400'}`}>Alan & Kapasite</span>
+                    <span class="font-bold text-xs">{model.areaSqm} • {model.seatingCapacity}</span>
+                  </div>
+                  <div>
+                    <span class={`text-[10px] font-bold uppercase tracking-wider block ${model.isPopular ? 'text-white/50' : 'text-stone-400'}`}>Ekip & Fırın</span>
+                    <span class="font-bold text-xs">{model.staffCount}</span>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <span class={`text-[11px] font-extrabold uppercase tracking-wider block mb-2 ${model.isPopular ? 'text-cotto-gold' : 'text-cotto-red'}`}>
+                    İdeal Lokasyon: {model.idealLocations}
+                  </span>
+                </div>
+
+                <ul class="space-y-2.5 text-xs sm:text-sm mb-6">
+                  {model.features.map((feat) => (
+                    <li class="flex items-start gap-2.5">
+                      <span class="text-cotto-gold font-bold mt-0.5">✓</span>
+                      <span class={model.isPopular ? 'text-white/80' : 'text-cotto-muted'}>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="px-6 sm:px-7 pb-7">
+              <a
+                href={`#franchise-application-form`}
+                data-select-concept={model.id}
+                class={`select-concept-btn w-full py-4 rounded-xl font-bold text-sm text-center block transition-all ${model.isPopular ? 'bg-cotto-gold hover:bg-amber-400 text-cotto-dark shadow-lg shadow-cotto-gold/20' : 'bg-cotto-dark hover:bg-cotto-red text-white'}`}
+              >
+                {model.name} İçin Başvur →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. INTERACTIVE FRANCHISE CALCULATOR -->
+  <FranchiseCalculator />
+
+  <!-- 4. UNIT ECONOMICS & FORNERO OVEN TECHNOLOGY -->
+  <section class="py-16 md:py-24 bg-white border-t border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Unit Economics Breakdown -->
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-cotto-red text-xs font-extrabold uppercase tracking-[0.2em] block">
+            ŞEFFAF BİRİM EKONOMİSİ (UNIT ECONOMICS)
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-serif font-extrabold text-cotto-dark tracking-tight">
+            Her 100 TL Cironun <span class="italic font-normal text-cotto-red">Net Dağılımı</span>
+          </h2>
+          <p class="text-cotto-muted text-sm sm:text-base leading-relaxed">
+            Hamur bazlı Napoliten pizza üretimi, et veya deniz ürünü ağırlıklı restoranlara kıyasla çok daha düşük hammadde maliyetine (COGS) sahiptir. Gurme burger çapraz satışıyla sepet ortalaması yükselirken karlılık maksimize edilir.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            {unitEconomics.map((item) => (
+              <div class="bg-[#FBF8F3] p-4 rounded-2xl border border-stone-200/80">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-bold text-sm text-cotto-dark">{item.label}</span>
+                  <span class="font-serif font-extrabold text-base text-cotto-red">{item.percentage}</span>
+                </div>
+                <p class="text-xs text-cotto-muted">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- 8 Strategic Franchise Advantages -->
+        <div class="lg:col-span-6">
+          <div class="bg-[#12100E] text-white rounded-[2.5rem] p-7 sm:p-10 border border-white/10 shadow-2xl">
+            <span class="text-cotto-gold text-xs font-extrabold uppercase tracking-widest block mb-2">
+              NEDEN COTTO NAPOLİTEN FRANCHISE?
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-serif font-extrabold mb-6">
+              8 Stratejik Rekabet Üstünlüğü
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {franchiseAdvantages.map((adv) => (
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-cotto-gold/40 transition-colors">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-cotto-gold bg-cotto-gold/10 px-2.5 py-1 rounded-md">
+                      {adv.highlight}
+                    </span>
+                  </div>
+                  <h4 class="font-serif font-bold text-base text-white mb-1">{adv.title}</h4>
+                  <p class="text-xs text-white/65 leading-relaxed line-clamp-3">{adv.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 45-DAY ONBOARDING TIMELINE & TARGET EXPANSION CITIES -->
+  <section class="py-16 md:py-24 bg-[#FBF8F3] border-t border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+      <!-- 8-Step Process -->
+      <div>
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-cotto-red text-xs font-extrabold uppercase tracking-[0.2em] block mb-2">
+            ANAHTAR TESLİM YOL HARİTASI
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-serif font-extrabold text-cotto-dark">
+            45 Günde <span class="italic font-normal text-cotto-red">Başvurudan Büyük Açılışa</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {franchiseSteps.map((s) => (
+            <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-sm relative flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="w-10 h-10 rounded-xl bg-cotto-red text-white font-serif font-extrabold text-base flex items-center justify-center shadow-md shadow-cotto-red/20">
+                    {s.step}
+                  </span>
+                  <span class="text-[11px] font-extrabold text-cotto-muted bg-stone-100 px-3 py-1 rounded-full">
+                    ⏱ {s.duration}
+                  </span>
+                </div>
+                <h3 class="font-serif font-bold text-lg text-cotto-dark mb-2">{s.title}</h3>
+                <p class="text-xs text-cotto-muted leading-relaxed">{s.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Priority Target Cities Table -->
+      <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 border border-stone-200 shadow-lg">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div>
+            <span class="text-cotto-red text-xs font-extrabold uppercase tracking-widest block mb-2">
+              2026 – 2027 GENİŞLEME HARİTASI
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-serif font-extrabold text-cotto-dark">
+              Öncelikli Franchise Tahsis Bölgeleri
+            </h3>
+          </div>
+          <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full">
+            ● Her İlçede Sadece 1 Yatırımcıya Bölge Koruması Verilir
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {targetExpansionCities.map((c) => (
+            <div class="p-4 rounded-2xl bg-[#FBF8F3] border border-stone-200/80 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <h4 class="font-serif font-extrabold text-lg text-cotto-dark">{c.city}</h4>
+                  <span class={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full ${c.status === 'Öncelikli Hedef' ? 'bg-cotto-red/10 text-cotto-red' : c.status === 'Aktif Merkez' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                    {c.status}
+                  </span>
+                </div>
+                <p class="text-xs text-cotto-muted mb-3">{c.priorityDistricts.join(', ')}</p>
+              </div>
+              <div class="text-[11px] font-extrabold text-cotto-dark border-t border-stone-200/60 pt-2 flex justify-between">
+                <span>Açık Kontenjan:</span>
+                <span class="text-cotto-red">{c.availableQuota} Şube</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. INVESTOR APPLICATION FORM & FAQ -->
+  <section id="franchise-application-form" class="py-16 md:py-28 bg-[#12100E] text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+        <!-- Left: Interactive Investor Application Form -->
+        <div class="lg:col-span-7 bg-[#1C1814] border border-white/15 rounded-[2.5rem] p-6 sm:p-10 shadow-2xl">
+          <div class="mb-8">
+            <span class="text-cotto-gold text-xs font-extrabold uppercase tracking-[0.2em] block mb-2">
+              RESMİ FRANCHISE ADAY BAŞVURU FORMU
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-serif font-extrabold text-white mb-2">
+              Bölgenizi Şimdi Rezerve Edin
+            </h2>
+            <p class="text-white/70 text-sm">
+              Başvurunuz doğrudan Cotto Napoliten Büyüme & Yatırımcı İlişkileri Direktörlüğü ekranına düşer ve 48 saat içinde fizibilite dosyası ile dönüş yapılır.
+            </p>
+          </div>
+
+          <form id="cotto-franchise-form" class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-white/75 mb-2">Adınız Soyadınız *</label>
+                <input
+                  type="text"
+                  name="fullName"
+                  required
+                  placeholder="Örn: Ahmet Yılmaz"
+                  class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/15 text-white placeholder-white/30 text-sm focus:outline-none focus:border-cotto-gold"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-white/75 mb-2">Cep Telefonu (WhatsApp) *</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  placeholder="05XX XXX XX XX"
+                  class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/15 text-white placeholder-white/30 text-sm focus:outline-none focus:border-cotto-gold"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-white/75 mb-2">E-Posta Adresiniz *</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="ornek@sirket.com"
+                  class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/15 text-white placeholder-white/30 text-sm focus:outline-none focus:border-cotto-gold"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-white/75 mb-2">Hedef Şehir & İlçe *</label>
+                <input
+                  type="text"
+                  name="city"
+                  required
+                  placeholder="Örn: Samsun / Atakum veya Ankara / Çankaya"
+                  class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/15 text-white placeholder-white/30 text-sm focus:outline-none focus:border-cotto-gold"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-white/75 mb-2">Tercih Edilen Mağaza Konsepti *</label>
+                <select
+                  name="conceptModel"
+                  id="form-concept-select"
+                  required
+                  class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/15 text-white text-sm focus:outline-none focus:border-cotto-gold"
+                >
+                  <option value="Cotto Bistro & Pizzeria (110-180 m²)">Cotto Bistro & Pizzeria (110-180 m² • En Çok Tercih Edilen)</option>
+                  <option value="Cotto Express (55-85 m²)">Cotto Express (55-85 m² • Paket & Gel-Al Odaklı)</option>
+                  <option value="Cotto Gastro Lounge (200-350 m²)">Cotto Gastro Lounge (200-350 m² • Flagship Restoran)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-white/75 mb-2">Planlanan Yatırım Bütçesi *</label>
+                <select
+                  name="budget"
+                  required
+                  class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/15 text-white text-sm focus:outline-none focus:border-cotto-gold"
+                >
+                  <option value="1.500.000 TL - 2.250.000 TL">1.500.000 TL – 2.250.000 TL</option>
+                  <option value="2.250.000 TL - 3.500.000 TL" selected>2.250.000 TL – 3.500.000 TL</option>
+                  <option value="3.500.000 TL - 5.000.000 TL">3.500.000 TL – 5.000.000 TL</option>
+                  <option value="5.000.000 TL ve Üzeri">5.000.000 TL ve Üzeri (Master / Çoklu Şube)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-white/75 mb-2">Mevcut Dükkan / Mülk Durumu</label>
+                <select
+                  name="hasLocation"
+                  class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/15 text-white text-sm focus:outline-none focus:border-cotto-gold"
+                >
+                  <option value="Mülk / Kiralık Yeri Hazır">Mevcut Dükkanım / Aday Lokasyonum Hazır</option>
+                  <option value="Lokasyon Arıyor (HQ Desteği İstiyor)">Lokasyon Arıyorum (Cotto Emlak Ekibi Destek Olsun)</option>
+                  <option value="AVM Yönetimi İle Görüşmede">AVM Yönetimi İle Görüşme Aşamasındayım</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-white/75 mb-2">Gıda / İşletmecilik Tecrübesi</label>
+                <select
+                  name="experience"
+                  class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/15 text-white text-sm focus:outline-none focus:border-cotto-gold"
+                >
+                  <option value="Restoran / Kafe İşletmeciliği Var">Restoran / Kafe İşletmeciliği Tecrübem Var</option>
+                  <option value="Farklı Sektörde Ticaret / Yatırımcı">Farklı Sektörde İşletmeciyim / Yatırımcıyım</option>
+                  <option value="Kurumsal Yönetici / İlk Yatırım">Kurumsal Yöneticilikten Geçiş / İlk Yatırımım</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-white/75 mb-2">Lokasyon Detayı ve Eklemek İstedikleriniz</label>
+              <textarea
+                name="notes"
+                rows="3"
+                placeholder="Düşündüğünüz cadde/AVM bilgisi, m² büyüklüğü veya ortaklık yapınız hakkında kısa bilgi..."
+                class="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/15 text-white placeholder-white/30 text-sm focus:outline-none focus:border-cotto-gold"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full py-4 rounded-xl bg-cotto-red hover:bg-cotto-red-dark text-white font-extrabold text-base shadow-xl shadow-cotto-red/30 transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>Franchise Başvurusunu Gönder & Dosya İste</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+            </button>
+          </form>
+
+          <!-- Success Feedback Box -->
+          <div id="franchise-form-success" class="hidden mt-6 p-6 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 text-white space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400">✓ BAŞVURUNUZ KAYDEDİLDİ</span>
+              <span id="franchise-tracking-code" class="font-mono font-extrabold text-sm bg-black/40 px-3 py-1 rounded-lg text-cotto-gold">#FR-COTTO-2026</span>
+            </div>
+            <h4 class="font-serif font-bold text-xl">Yatırımcı Dosyanız Hazırlanıyor!</h4>
+            <p class="text-xs sm:text-sm text-white/80 leading-relaxed">
+              Başvurunuz Cotto Napoliten Franchise Yönetim Sistemi'ne (<a href="/admin" class="underline text-cotto-gold font-bold">/admin CRM</a>) kaydedildi. Dilerseniz hemen WhatsApp Yatırımcı Hattımızdan öncelikli randevu oluşturabilirsiniz.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-1">
+              <a
+                id="franchise-whatsapp-followup"
+                href="https://wa.me/905458344090"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-5 py-2.5 rounded-xl bg-[#25D366] text-white font-bold text-xs shadow-md"
+              >
+                💬 WhatsApp ile Başvurumu Hızlandır
+              </a>
+              <a href="/admin" class="px-4 py-2.5 rounded-xl bg-white/10 text-white font-bold text-xs">
+                🔐 HQ CRM Panelinde Gör
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Investor FAQs -->
+        <div class="lg:col-span-5 space-y-6">
+          <div>
+            <span class="text-cotto-gold text-xs font-extrabold uppercase tracking-widest block mb-2">
+              YATIRIMCI REHBERİ (SSS)
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-serif font-extrabold text-white">
+              Sıkça Sorulan Franchise Soruları
+            </h3>
+          </div>
+
+          <div class="space-y-3.5">
+            {franchiseFAQs.map((faq, idx) => (
+              <details class="group bg-[#1C1814] border border-white/10 rounded-2xl p-5 open:border-cotto-gold/40 transition-all" open={idx === 0}>
+                <summary class="font-serif font-bold text-base text-white cursor-pointer list-none flex items-center justify-between gap-4">
+                  <span>{faq.question}</span>
+                  <span class="text-cotto-gold text-xl group-open:rotate-45 transition-transform">+</span>
+                </summary>
+                <p class="mt-3 text-xs sm:text-sm text-white/70 leading-relaxed border-t border-white/10 pt-3">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const STORAGE_KEY = 'cotto_franchise_applications';
+    const form = document.getElementById('cotto-franchise-form') as HTMLFormElement | null;
+    const successBox = document.getElementById('franchise-form-success');
+    const trackingEl = document.getElementById('franchise-tracking-code');
+    const waFollowup = document.getElementById('franchise-whatsapp-followup') as HTMLAnchorElement | null;
+    const conceptSelect = document.getElementById('form-concept-select') as HTMLSelectElement | null;
+
+    // Concept card quick selection buttons
+    document.querySelectorAll('.select-concept-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const modelId = btn.getAttribute('data-select-concept');
+        if (!conceptSelect) return;
+        if (modelId === 'cotto-express') conceptSelect.selectedIndex = 1;
+        if (modelId === 'cotto-bistro') conceptSelect.selectedIndex = 0;
+        if (modelId === 'cotto-gastro-lounge') conceptSelect.selectedIndex = 2;
+      });
+    });
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const code = `FR-COTTO-${Math.floor(1000 + Math.random() * 9000)}`;
+
+        const newApp = {
+          id: code,
+          fullName: String(fd.get('fullName') || ''),
+          phone: String(fd.get('phone') || ''),
+          email: String(fd.get('email') || ''),
+          city: String(fd.get('city') || ''),
+          conceptModel: String(fd.get('conceptModel') || 'Cotto Bistro & Pizzeria'),
+          budget: String(fd.get('budget') || ''),
+          hasLocation: String(fd.get('hasLocation') || ''),
+          experience: String(fd.get('experience') || ''),
+          notes: String(fd.get('notes') || ''),
+          status: 'Yeni Başvuru',
+          createdAt: new Date().toISOString()
+        };
+
+        try {
+          const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          existing.unshift(newApp);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+        } catch (err) {
+          console.error(err);
+        }
+
+        if (trackingEl) trackingEl.textContent = `#${code}`;
+        if (waFollowup) {
+          const msg = `Merhaba Cotto Napoliten Franchise Direktörlüğü, #${code} takip numarasıyla ${newApp.city} (${newApp.conceptModel}) için yatırımcı başvurusu yaptım. İsim: ${newApp.fullName}`;
+          waFollowup.href = `https://wa.me/905458344090?text=${encodeURIComponent(msg)}`;
+        }
+        if (successBox) successBox.classList.remove('hidden');
+        form.reset();
+      });
+    }
+  });
+</script>

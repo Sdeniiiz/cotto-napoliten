@@ -1,0 +1,75 @@
+---
+// src/pages/subeler/[slug].astro
+import Layout from '../../layouts/Layout.astro';
+import BranchHero from '../../components/branches/BranchHero.astro';
+import BranchInfo from '../../components/branches/BranchInfo.astro';
+import BranchMap from '../../components/branches/BranchMap.astro';
+import BranchOrderCTA from '../../components/branches/BranchOrderCTA.astro';
+import CampaignSection from '../../components/campaigns/CampaignSection.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { getAllBranches } from '../../services/branchService';
+import { getProductsByBranch } from '../../services/productService';
+import { getCampaignsByBranch } from '../../services/campaignService';
+
+export function getStaticPaths() {
+  const branches = getAllBranches();
+  return branches.map((branch) => ({
+    params: { slug: branch.slug },
+    props: { branch }
+  }));
+}
+
+const { branch } = Astro.props;
+const branchProducts = getProductsByBranch(branch.slug);
+const branchCampaigns = getCampaignsByBranch(branch.slug);
+---
+
+<Layout
+  title={branch.seo?.metaTitle || `${branch.name} | Cotto Napoliten ${branch.city} Şubesi`}
+  description={branch.seo?.metaDescription || `${branch.name} adres, telefon, çalışma saatleri ve özel Napoliten fırın Napoliten pizza menüsü.`}
+>
+  <BranchHero branch={branch} />
+
+  <section class="py-12 md:py-20 bg-[#FBF8F3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-5">
+          <BranchInfo branch={branch} />
+        </div>
+        <div class="lg:col-span-7 space-y-6">
+          <BranchOrderCTA branch={branch} />
+          <BranchMap branch={branch} />
+        </div>
+      </div>
+
+      <CampaignSection campaigns={branchCampaigns} title={`${branch.name} Özel Kampanyaları`} />
+
+      <!-- Branch Menu -->
+      <div>
+        <div class="mb-8">
+          <span class="text-xs font-extrabold uppercase tracking-widest text-cotto-red block mb-1">ÖZEL NAPOLİTEN FIRINDAN SICAK</span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-extrabold text-cotto-dark">{branch.name} Menüsü</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          {branchProducts.map((item) => (
+            <ProductCard
+              name={item.name}
+              description={item.shortDescription || item.description}
+              price={item.price}
+              image={item.image}
+              isPopular={item.isPopular}
+              badge={item.badge}
+              calories={item.calories}
+              prepTime={item.prepTimeMinutes}
+              slug={item.slug}
+              category={item.category}
+            />
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

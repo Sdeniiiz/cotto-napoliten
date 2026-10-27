@@ -1,0 +1,58 @@
+---
+// src/pages/napoliten/[slug].astro
+import Layout from '../../layouts/Layout.astro';
+import { articles } from '../../data/articles';
+
+export function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article }
+  }));
+}
+
+const { article } = Astro.props;
+---
+
+<Layout
+  title={article.metaTitle || `${article.title} | Cotto Napoliten`}
+  description={article.metaDescription || article.excerpt}
+  type="article"
+>
+  <article class="pt-28 pb-20 md:pt-36 md:pb-28 bg-[#FBF8F3]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/napoliten" class="text-xs font-extrabold uppercase tracking-widest text-cotto-red hover:underline block mb-4">
+        ← Napoliten Rehberine Dön
+      </a>
+
+      <p class="text-xs font-extrabold uppercase tracking-widest text-cotto-red mb-3">
+        {article.category} • {article.readTime}
+      </p>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif font-extrabold text-cotto-dark tracking-tight leading-tight mb-6">
+        {article.title}
+      </h1>
+
+      <div class="aspect-video rounded-3xl overflow-hidden mb-10 shadow-lg border border-stone-200">
+        <img src="/images/cotto/mekan-tas-firin.jpg" alt={article.title} class="w-full h-full object-cover" />
+      </div>
+
+      <div
+        class="prose prose-stone max-w-none bg-white p-6 sm:p-10 rounded-3xl border border-stone-200/80 shadow-sm space-y-4 text-cotto-dark leading-relaxed"
+        set:html={article.content}
+      />
+
+      <div class="mt-12 bg-[#12100E] text-white rounded-3xl p-8 text-center space-y-4">
+        <h3 class="text-2xl font-serif font-extrabold">Bu Lezzet Sisteminin Ortağı Olun</h3>
+        <p class="text-white/75 text-sm max-w-xl mx-auto">
+          Cotto Napoliten'in usta bağımsız Fornero özel Napoliten fırın teknolojisiyle kendi şehrinizde yüksek karlı bir şube açın.
+        </p>
+        <a
+          href="/franchise"
+          class="inline-block px-7 py-3.5 rounded-full bg-cotto-gold text-cotto-dark font-extrabold text-sm hover:bg-amber-400 transition-colors"
+        >
+          Franchise Yatırımcı Paketlerini İncele →
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>

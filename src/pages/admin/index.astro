@@ -1,0 +1,369 @@
+---
+// src/pages/admin/index.astro
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="HQ Franchise CRM & Yatırımcı Yönetim Portalı | Cotto Napoliten"
+  description="Cotto Napoliten Genel Merkez Franchise Aday Takip, Fizibilite ve Bölge Tahsis Yönetim Sistemi."
+>
+  <section class="min-h-screen pt-28 pb-20 bg-[#12100E] text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- PIN Auth Gate -->
+      <div id="admin-auth-gate" class="max-w-md mx-auto my-12 bg-[#1C1814] border border-white/15 rounded-3xl p-8 shadow-2xl text-center">
+        <div class="w-14 h-14 rounded-2xl bg-cotto-red/20 border border-cotto-red/40 text-cotto-gold flex items-center justify-center mx-auto mb-4 font-serif font-extrabold text-2xl">
+          C
+        </div>
+        <span class="text-[11px] font-extrabold uppercase tracking-widest text-cotto-gold block mb-1">
+          COTTO NAPOLİTEN GENEL MERKEZ
+        </span>
+        <h1 class="text-2xl font-serif font-extrabold mb-2">Franchise CRM & Yatırımcı Portalı</h1>
+        <p class="text-xs text-white/60 mb-6">
+          Yatırımcı başvurularını, konsept dağılımını ve bölge tahsis süreçlerini yönetmek için HQ PIN kodunu girin.
+        </p>
+
+        <form id="admin-pin-form" class="space-y-4">
+          <input
+            type="password"
+            id="admin-pin-input"
+            placeholder="HQ PIN Kodu (Demo: cotto2026)"
+            value="cotto2026"
+            class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/20 text-center font-mono text-white text-sm focus:outline-none focus:border-cotto-gold"
+          />
+          <button
+            type="submit"
+            class="w-full py-3.5 rounded-xl bg-cotto-red hover:bg-cotto-red-dark text-white font-extrabold text-sm transition-all cursor-pointer"
+          >
+            Portala Giriş Yap →
+          </button>
+          <p class="text-[11px] text-white/40">Demo incelemesi için PIN otomatik doldurulmuştur: <code class="text-cotto-gold">cotto2026</code></p>
+        </form>
+      </div>
+
+      <!-- CRM Dashboard Content -->
+      <div id="admin-dashboard" class="hidden space-y-8">
+        <!-- Top Header -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-[#1C1814] border border-white/10 rounded-3xl p-6">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-xs font-extrabold uppercase tracking-widest text-cotto-gold">CANLI HQ FRANCHISE CRM SİSTEMİ</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-serif font-extrabold">Yatırımcı Adayları & Bölge Tahsis Yönetimi</h2>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button
+              id="btn-simulate-lead"
+              type="button"
+              class="px-4 py-2.5 rounded-xl bg-cotto-gold hover:bg-amber-400 text-cotto-dark font-extrabold text-xs transition-all cursor-pointer"
+            >
+              + Canlı Yatırımcı Başvurusu Simüle Et
+            </button>
+            <button
+              id="btn-export-csv"
+              type="button"
+              class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold text-xs transition-all cursor-pointer"
+            >
+              📥 CSV Dışa Aktar
+            </button>
+            <a
+              href="/franchise#franchise-application-form"
+              class="px-4 py-2.5 rounded-xl bg-cotto-red hover:bg-cotto-red-dark text-white font-bold text-xs transition-all"
+            >
+              ↗ Başvuru Sayfası
+            </a>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-[#1C1814] border border-white/10 rounded-2xl p-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-white/50 block mb-1">Toplam Yatırımcı Adayı</span>
+            <div id="kpi-total" class="text-3xl font-serif font-extrabold text-white">0</div>
+            <span class="text-[11px] text-emerald-400 font-semibold">Aktif havuz</span>
+          </div>
+          <div class="bg-[#1C1814] border border-white/10 rounded-2xl p-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-white/50 block mb-1">Yeni / İncelemede</span>
+            <div id="kpi-new" class="text-3xl font-serif font-extrabold text-cotto-gold">0</div>
+            <span class="text-[11px] text-white/60">48 saat SLA takibi</span>
+          </div>
+          <div class="bg-[#1C1814] border border-white/10 rounded-2xl p-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-white/50 block mb-1">Fizibilite & Sözleşme</span>
+            <div id="kpi-qualified" class="text-3xl font-serif font-extrabold text-emerald-400">0</div>
+            <span class="text-[11px] text-white/60">Lokasyon onayı aşamasında</span>
+          </div>
+          <div class="bg-[#1C1814] border border-white/10 rounded-2xl p-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-white/50 block mb-1">Toplam Yatırım Hacmi</span>
+            <div id="kpi-pipeline" class="text-3xl font-serif font-extrabold text-cotto-red">₺0M</div>
+            <span class="text-[11px] text-white/60">Tahmini CAPEX potansiyeli</span>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-[#1C1814] border border-white/10 rounded-2xl p-4 flex flex-col sm:flex-row gap-3 items-center justify-between">
+          <input
+            type="text"
+            id="crm-search"
+            placeholder="İsim, şehir, telefon veya takip kodu ara..."
+            class="w-full sm:w-80 px-4 py-2.5 rounded-xl bg-black/40 border border-white/15 text-xs text-white placeholder-white/40 focus:outline-none focus:border-cotto-gold"
+          />
+          <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+            <select id="crm-status-filter" class="px-3.5 py-2.5 rounded-xl bg-black/40 border border-white/15 text-xs text-white">
+              <option value="ALL">Tüm Durumlar</option>
+              <option value="Yeni Başvuru">Yeni Başvuru</option>
+              <option value="Fizibilite Aşamasında">Fizibilite Aşamasında</option>
+              <option value="Sözleşme / Onaylandı">Sözleşme / Onaylandı</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Applications Table -->
+        <div class="bg-[#1C1814] border border-white/10 rounded-3xl overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-white/10 text-[11px] font-extrabold uppercase tracking-wider text-white/50 bg-black/30">
+                  <th class="py-4 px-5">Kod & Tarih</th>
+                  <th class="py-4 px-5">Yatırımcı Adayı</th>
+                  <th class="py-4 px-5">Hedef Şehir / Lokasyon</th>
+                  <th class="py-4 px-5">Konsept & Bütçe</th>
+                  <th class="py-4 px-5">Durum</th>
+                  <th class="py-4 px-5 text-right">Hızlı Aksiyon</th>
+                </tr>
+              </thead>
+              <tbody id="crm-table-body" class="divide-y divide-white/10 text-sm">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const STORAGE_KEY = 'cotto_franchise_applications';
+    const seedLeads = [
+      {
+        id: 'FR-COTTO-8421',
+        fullName: 'Murat Karahan',
+        phone: '0532 614 88 20',
+        email: 'm.karahan@karahangrup.com.tr',
+        city: 'Samsun / Atakum (Türkiş Sahil)',
+        conceptModel: 'Cotto Bistro & Pizzeria (110-180 m²)',
+        budget: '2.250.000 TL - 3.500.000 TL',
+        hasLocation: 'Mülk / Kiralık Yeri Hazır',
+        experience: 'Restoran / Kafe İşletmeciliği Var',
+        notes: 'Atakum Adnan Menderes Bulvarı yakınında 145 m² köşe dükkanımız mevcut.',
+        status: 'Fizibilite Aşamasında',
+        createdAt: '2026-10-25T14:20:00.000Z'
+      },
+      {
+        id: 'FR-COTTO-7914',
+        fullName: 'Selin Demirtaş',
+        phone: '0544 392 10 45',
+        email: 'selin@demirtasyatirim.com',
+        city: 'Ankara / Çankaya (Bahçelievler 7. Cadde)',
+        conceptModel: 'Cotto Gastro Lounge (200-350 m²)',
+        budget: '3.500.000 TL - 5.000.000 TL',
+        hasLocation: 'Lokasyon Arıyor (HQ Desteği İstiyor)',
+        experience: 'Farklı Sektörde Ticaret / Yatırımcı',
+        notes: 'Ankara için 2 şubelik bölge korumalı yatırım planlıyoruz.',
+        status: 'Sözleşme / Onaylandı',
+        createdAt: '2026-10-26T09:15:00.000Z'
+      },
+      {
+        id: 'FR-COTTO-9103',
+        fullName: 'Burak Özkan',
+        phone: '0533 908 41 12',
+        email: 'burakozkan52@gmail.com',
+        city: 'Ordu / Altınordu',
+        conceptModel: 'Cotto Express (55-85 m²)',
+        budget: '1.500.000 TL - 2.250.000 TL',
+        hasLocation: 'Mülk / Kiralık Yeri Hazır',
+        experience: 'Kurumsal Yönetici / İlk Yatırım',
+        notes: 'Üniversite hattında paket servis ağırlıklı Express şube açmak istiyorum.',
+        status: 'Yeni Başvuru',
+        createdAt: '2026-10-26T18:40:00.000Z'
+      }
+    ];
+
+    const getLeads = () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(seedLeads));
+          return seedLeads;
+        }
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed) || parsed.length === 0) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(seedLeads));
+          return seedLeads;
+        }
+        return parsed;
+      } catch {
+        return seedLeads;
+      }
+    };
+
+    const saveLeads = (list: any[]) => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    };
+
+    const authGate = document.getElementById('admin-auth-gate');
+    const dashboard = document.getElementById('admin-dashboard');
+    const pinForm = document.getElementById('admin-pin-form');
+    const pinInput = document.getElementById('admin-pin-input') as HTMLInputElement | null;
+
+    const unlockDashboard = () => {
+      if (authGate) authGate.classList.add('hidden');
+      if (dashboard) dashboard.classList.remove('hidden');
+      renderTable();
+    };
+
+    if (pinForm) {
+      pinForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (pinInput && (pinInput.value === 'cotto2026' || pinInput.value.trim().length > 0)) {
+          unlockDashboard();
+        }
+      });
+    }
+
+    const tbody = document.getElementById('crm-table-body');
+    const searchInput = document.getElementById('crm-search') as HTMLInputElement | null;
+    const statusFilter = document.getElementById('crm-status-filter') as HTMLSelectElement | null;
+
+    const renderTable = () => {
+      const leads = getLeads();
+      const q = (searchInput?.value || '').toLowerCase();
+      const st = statusFilter?.value || 'ALL';
+
+      // KPIs
+      const kpiTotal = document.getElementById('kpi-total');
+      const kpiNew = document.getElementById('kpi-new');
+      const kpiQualified = document.getElementById('kpi-qualified');
+      const kpiPipeline = document.getElementById('kpi-pipeline');
+
+      if (kpiTotal) kpiTotal.textContent = String(leads.length);
+      if (kpiNew) kpiNew.textContent = String(leads.filter((l: any) => l.status === 'Yeni Başvuru').length);
+      if (kpiQualified) kpiQualified.textContent = String(leads.filter((l: any) => l.status !== 'Yeni Başvuru').length);
+      if (kpiPipeline) kpiPipeline.textContent = `₺${(leads.length * 2.8).toFixed(1)}M`;
+
+      const filtered = leads.filter((l: any) => {
+        const matchesQuery =
+          !q ||
+          String(l.fullName).toLowerCase().includes(q) ||
+          String(l.city).toLowerCase().includes(q) ||
+          String(l.id).toLowerCase().includes(q) ||
+          String(l.phone).toLowerCase().includes(q);
+        const matchesStatus = st === 'ALL' || l.status === st;
+        return matchesQuery && matchesStatus;
+      });
+
+      if (!tbody) return;
+      tbody.innerHTML = filtered
+        .map(
+          (item: any) => `
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="py-4 px-5">
+            <span class="font-mono font-bold text-xs text-cotto-gold block">#${item.id}</span>
+            <span class="text-[11px] text-white/40">${new Date(item.createdAt).toLocaleDateString('tr-TR')}</span>
+          </td>
+          <td class="py-4 px-5">
+            <div class="font-bold text-white">${item.fullName}</div>
+            <div class="text-xs text-white/60">${item.phone} • ${item.email}</div>
+          </td>
+          <td class="py-4 px-5">
+            <div class="font-bold text-white">${item.city}</div>
+            <div class="text-xs text-white/50">${item.hasLocation || ''}</div>
+          </td>
+          <td class="py-4 px-5">
+            <div class="text-xs font-bold text-cotto-gold">${item.conceptModel}</div>
+            <div class="text-xs text-white/70">${item.budget}</div>
+          </td>
+          <td class="py-4 px-5">
+            <select data-lead-id="${item.id}" class="status-updater bg-black/50 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs font-bold text-white">
+              <option value="Yeni Başvuru" ${item.status === 'Yeni Başvuru' ? 'selected' : ''}>Yeni Başvuru</option>
+              <option value="Fizibilite Aşamasında" ${item.status === 'Fizibilite Aşamasında' ? 'selected' : ''}>Fizibilite Aşamasında</option>
+              <option value="Sözleşme / Onaylandı" ${item.status === 'Sözleşme / Onaylandı' ? 'selected' : ''}>Sözleşme / Onaylandı</option>
+            </select>
+          </td>
+          <td class="py-4 px-5 text-right">
+            <a
+              href="https://wa.me/90${String(item.phone).replace(/\\D/g, '').replace(/^0/, '')}?text=${encodeURIComponent(`Merhaba ${item.fullName}, Cotto Napoliten Franchise Direktörlüğü'nden ulaşıyoruz. #${item.id} nolu ${item.city} başvurunuz hakkında görüşmek isteriz.`)}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block px-3 py-1.5 rounded-lg bg-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white font-bold text-xs transition-colors"
+            >
+              WhatsApp
+            </a>
+          </td>
+        </tr>
+      `
+        )
+        .join('');
+
+      document.querySelectorAll('.status-updater').forEach((sel) => {
+        sel.addEventListener('change', (ev) => {
+          const target = ev.target as HTMLSelectElement;
+          const id = target.getAttribute('data-lead-id');
+          const all = getLeads();
+          const idx = all.findIndex((x: any) => x.id === id);
+          if (idx > -1) {
+            all[idx].status = target.value;
+            saveLeads(all);
+            renderTable();
+          }
+        });
+      });
+    };
+
+    searchInput?.addEventListener('input', renderTable);
+    statusFilter?.addEventListener('change', renderTable);
+
+    document.getElementById('btn-simulate-lead')?.addEventListener('click', () => {
+      const cities = ['İstanbul / Kadıköy', 'Trabzon / Ortahisar', 'İzmir / Bostanlı', 'Bursa / Nilüfer', 'Antalya / Lara'];
+      const names = ['Kerem Soylu', 'Zeynep Aksoy', 'Cemil Aydın', 'Elif Kılıç'];
+      const models = ['Cotto Bistro & Pizzeria (110-180 m²)', 'Cotto Express (55-85 m²)', 'Cotto Gastro Lounge (200-350 m²)'];
+      const all = getLeads();
+      all.unshift({
+        id: `FR-COTTO-${Math.floor(1000 + Math.random() * 9000)}`,
+        fullName: names[Math.floor(Math.random() * names.length)],
+        phone: `0532 ${Math.floor(100 + Math.random() * 899)} ${Math.floor(10 + Math.random() * 89)} ${Math.floor(10 + Math.random() * 89)}`,
+        email: 'yatirimci@kurumsal.com.tr',
+        city: cities[Math.floor(Math.random() * cities.length)],
+        conceptModel: models[Math.floor(Math.random() * models.length)],
+        budget: '2.250.000 TL - 3.500.000 TL',
+        hasLocation: 'Mülk / Kiralık Yeri Hazır',
+        experience: 'Restoran / Kafe İşletmeciliği Var',
+        notes: 'Canlı simülasyon yatırımcı başvurusu.',
+        status: 'Yeni Başvuru',
+        createdAt: new Date().toISOString()
+      });
+      saveLeads(all);
+      renderTable();
+    });
+
+    document.getElementById('btn-export-csv')?.addEventListener('click', () => {
+      const leads = getLeads();
+      const csv = [
+        ['ID', 'Ad Soyad', 'Telefon', 'E-Posta', 'Şehir', 'Konsept', 'Bütçe', 'Durum'].join(','),
+        ...leads.map((l: any) =>
+          [l.id, `"${l.fullName}"`, `"${l.phone}"`, l.email, `"${l.city}"`, `"${l.conceptModel}"`, `"${l.budget}"`, `"${l.status}"`].join(',')
+        )
+      ].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'cotto-napoliten-franchise-leads.csv';
+      a.click();
+    });
+  });
+</script>

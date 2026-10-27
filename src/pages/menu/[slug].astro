@@ -1,0 +1,134 @@
+---
+// src/pages/menu/[slug].astro
+import Layout from '../../layouts/Layout.astro';
+import { getAllProducts } from '../../services/productService';
+
+export function getStaticPaths() {
+  const products = getAllProducts();
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product }
+  }));
+}
+
+const { product } = Astro.props;
+const relatedProducts = getAllProducts()
+  .filter((p) => p.category === product.category && p.id !== product.id)
+  .slice(0, 3);
+---
+
+<Layout
+  title={`${product.name} (${product.price} ₺) | Cotto Napoliten Özel Napoliten Fırın Menü`}
+  description={product.description}
+  image={product.image}
+>
+  <section class="py-12 md:py-20 bg-[#F4EFEA]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-stone-500 mb-6">
+        <a href="/" class="hover:text-[#D9381E]">Ana Sayfa</a>
+        <span>/</span>
+        <a href="/menu" class="hover:text-[#D9381E]">Lezzet Kataloğu</a>
+        <span>/</span>
+        <span class="text-[#141210]">{product.name}</span>
+      </nav>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border-2 border-stone-200/90 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <!-- Product Image -->
+        <div class="lg:col-span-6">
+          <div class="aspect-square rounded-2xl overflow-hidden bg-stone-100 relative shadow-md border border-stone-200">
+            <img src={product.image} alt={product.name} class="w-full h-full object-cover" />
+            {product.badge && (
+              <span class="absolute top-4 left-4 bg-[#141210] text-[#E59838] text-xs font-black uppercase tracking-wider px-4 py-1.5 rounded-xl shadow-md">
+                {product.badge}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="lg:col-span-6 space-y-6">
+          <div>
+            <span class="text-xs font-black uppercase tracking-widest text-[#D9381E] block mb-1.5">
+              {product.categoryName || product.category}
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-black text-[#141210] uppercase tracking-tight mb-2">
+              {product.name}
+            </h1>
+            <div class="text-3xl font-mono font-black text-[#D9381E]">
+              {product.price} ₺
+            </div>
+          </div>
+
+          <p class="text-stone-600 text-base leading-relaxed">
+            {product.description}
+          </p>
+
+          {product.ingredients && product.ingredients.length > 0 && (
+            <div class="pt-1">
+              <span class="text-xs font-black uppercase tracking-wider text-stone-400 block mb-1.5">İçindekiler</span>
+              <p class="text-sm font-medium text-stone-700 leading-relaxed">
+                {product.ingredients.join(' • ')}
+              </p>
+            </div>
+          )}
+
+          <!-- Specs -->
+          <div class="grid grid-cols-3 gap-4 py-4 border-y border-stone-200">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">Porsiyon</span>
+              <span class="font-mono font-black text-sm text-[#141210]">{product.portionGrams}g</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">Enerji</span>
+              <span class="font-mono font-black text-sm text-[#141210]">{product.calories} kcal</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">Pişirme</span>
+              <span class="font-mono font-black text-sm text-[#D9381E]">450°C / 90Sn</span>
+            </div>
+          </div>
+
+          <!-- Clean Links -->
+          <div class="flex flex-wrap items-center gap-6 pt-2">
+            <a
+              href="https://www.yemeksepeti.com/restaurant/xiok/cotto-cafe-and-restoran-xiok"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-extrabold text-[#D9381E] hover:text-[#141210] underline underline-offset-4 transition-colors"
+            >
+              Yemeksepeti Mağazasında Gör ↗
+            </a>
+            <a
+              href="/franchise"
+              class="text-sm font-bold text-stone-600 hover:text-[#141210] transition-colors"
+            >
+              Franchise & Yatırım Bilgisi →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {relatedProducts.length > 0 && (
+        <div class="mt-14">
+          <h2 class="text-2xl font-black uppercase text-[#141210] mb-6">Diğer İmza Lezzetlerimiz</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {relatedProducts.map((rel) => (
+              <a href={`/menu/${rel.slug}`} class="bg-white rounded-2xl p-4 border-2 border-stone-200/80 hover:border-[#D9381E] shadow-xs hover:shadow-lg transition-all block">
+                <div class="aspect-[4/3] rounded-xl overflow-hidden mb-3">
+                  <img src={rel.image} alt={rel.name} class="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div class="flex justify-between items-center">
+                  <h3 class="font-black text-base text-[#141210]">{rel.name}</h3>
+                  <span class="font-mono font-black text-[#D9381E]">{rel.price} ₺</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+    </div>
+  </section>
+</Layout>

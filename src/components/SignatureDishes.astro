@@ -1,0 +1,94 @@
+---
+// src/components/SignatureDishes.astro
+// Uses 100% real Cotto Napoliten product photos, clean layout without button clutter
+const signatureItems = [
+  {
+    id: 'sig-01',
+    name: '4 Peynirli Napoliten Pizza',
+    tagline: 'Mozzarella, Fontina, Gorgonzola & Grana Padano',
+    description: 'Restoranımızın en çok tercih edilen peynir şöleni. Mozzarella, Fontina, Gorgonzola ve olgun Grana Padano peynirleri 450°C özel Napoliten kubbe fırınımızda tek bir kadife katmana dönüşür; leopar benekli çıtır-yumuşak kenarlarıyla sıcak servis edilir.',
+    image: '/images/cotto/02_4_Peynirli_Pizza.jpg',
+    slug: 'dort-peynirli-napoliten-pizza',
+    specs: '460g • 90 Sn Özel Fırın • 500 ₺',
+    reverse: false
+  },
+  {
+    id: 'sig-02',
+    name: 'Calzone Burger',
+    tagline: 'Napoliten Pizza Hamuru İçinde Burger Köftesi, Füme Et & Cheddar',
+    description: 'Cotto Napoliten’in pizza hamuru ile gurme burgeri birleştiren özel imzası! Sulu dana burger köftesi, dana füme et, eriyen cheddar peyniri ve karamelize soğan 72 saat dinlenmiş Napoliten pizza hamuruna sarılarak 450°C özel fırınımızda nar gibi kızartılır.',
+    image: '/images/cotto/11_Calzone_Burger.jpg',
+    slug: 'calzone-burger',
+    specs: '460g • Cotto Özel İmzası • 400 ₺',
+    reverse: true
+  },
+  {
+    id: 'sig-03',
+    name: 'Cotto Burger',
+    tagline: '%100 Dana Burger Köftesi, Dana Füme Et & Karamelize Soğan',
+    description: 'Cotto Cafe & Restoran’ın pizzaları kadar ünlü imza burgeri. Izgarada mühürlenen dana köftesi, dana füme et, eriyen cheddar peyniri, karamelize soğan ve özel Cotto sosuyla hazırlanır.',
+    image: '/images/cotto/13_Cotto_Burger.jpg',
+    slug: 'cotto-signature-burger',
+    specs: '430g • İmza Burger • 380 ₺',
+    reverse: false
+  }
+];
+---
+
+<section id="imza-lezzetler" class="py-20 sm:py-28 bg-[#141210] text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+      <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-[#E59838]">
+        COTTO NAPOLİTEN İMZA SERİSİ
+      </p>
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+        Öne Çıkan <span class="font-serif italic text-[#E59838] capitalize">İmza Lezzetlerimiz</span>
+      </h2>
+      <p class="text-sm sm:text-base text-stone-400">
+        Hem gerçek Napoliten pizza tutkunlarını hem de gurme burger severleri aynı masada buluşturan yıldız reçetelerimiz.
+      </p>
+    </div>
+
+    <div class="space-y-20">
+      {signatureItems.map((item, idx) => (
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          <div class={`lg:col-span-6 ${item.reverse ? 'lg:order-2' : 'lg:order-1'}`}>
+            <a href={`/menu/${item.slug}`} class="block aspect-[16/11] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+              <img
+                src={item.image}
+                alt={item.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </a>
+          </div>
+
+          <div class={`lg:col-span-6 space-y-4 ${item.reverse ? 'lg:order-1' : 'lg:order-2'}`}>
+            <div class="text-xs font-mono text-[#E59838] font-bold">
+              0{idx + 1} • {item.specs}
+            </div>
+            <h3 class="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">
+              {item.name}
+            </h3>
+            <p class="text-sm font-semibold text-stone-300">
+              {item.tagline}
+            </p>
+            <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
+              {item.description}
+            </p>
+            <div class="pt-2">
+              <a
+                href={`/menu/${item.slug}`}
+                class="text-sm font-extrabold text-[#E59838] hover:underline underline-offset-8"
+              >
+                Ürün Detayını İncele →
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

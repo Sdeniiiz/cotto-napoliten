@@ -1,0 +1,27 @@
+---
+// src/components/campaigns/CampaignSection.astro
+import type { Campaign } from '../../types/campaign';
+import CampaignCard from './CampaignCard.astro';
+
+interface Props {
+  campaigns: Campaign[];
+  title?: string;
+}
+
+const { campaigns, title = "Şubeye Özel Kampanyalar" } = Astro.props;
+---
+
+{campaigns && campaigns.length > 0 && (
+  <section class="py-12">
+    <div class="mb-8">
+      <span class="text-xs font-extrabold uppercase tracking-widest text-cotto-red block mb-1">AVANTAJLI MENÜLER</span>
+      <h2 class="text-2xl sm:text-3xl font-serif font-extrabold text-cotto-dark">{title}</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {campaigns.map((camp) => (
+        <CampaignCard campaign={camp} />
+      ))}
+    </div>
+  </section>
+)}

@@ -1,0 +1,30 @@
+---
+// src/pages/hakkimizda.astro
+import Layout from '../layouts/Layout.astro';
+import BrandStory from '../components/BrandStory.astro';
+import StoreFrontFeature from '../components/StoreFrontFeature.astro';
+import WhyBox from '../components/WhyBox.astro';
+---
+
+<Layout
+  title="Hakkımızda | Cotto Napoliten Hikayesi & Özel Napoliten Fırın Felsefemiz"
+  description="Samsun Çarşamba'dan doğan gerçek Napoliten pizza ve gurme burger markası Cotto Napoliten'in hikayesi, 72 saat soğuk fermantasyon sırrı ve büyüme vizyonu."
+>
+  <section class="pt-28 pb-16 md:pt-36 md:pb-24 bg-[#12100E] text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="text-cotto-gold text-xs font-extrabold uppercase tracking-[0.2em] block mb-3">
+        NAPOLİ GELENEĞİ • MODERN TÜRKİYE VİZYONU
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold tracking-tight mb-4">
+        Ateş, Un ve <span class="italic font-normal text-cotto-gold">72 Saatlik Sabır.</span>
+      </h1>
+      <p class="text-white/75 text-base sm:text-lg font-light leading-relaxed">
+        Cotto Napoliten, Kirazbucağı Çarşamba'daki amiral gemisi mutfağında "gerçek özel Napoliten fırın Napoliten pizzayı ve el yapımı brioche gurme burgeri ulaşılabilir lüks olarak sunma" tutkusuyla kuruldu.
+      </p>
+    </div>
+  </section>
+
+  <BrandStory />
+  <StoreFrontFeature />
+  <WhyBox />
+</Layout>

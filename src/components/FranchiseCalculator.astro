@@ -1,0 +1,328 @@
+---
+import { franchiseConceptModels, unitEconomicsBreakdown } from '../data/franchise';
+
+interface Props {
+  isStandalonePage?: boolean;
+}
+
+const { isStandalonePage = false } = Astro.props;
+---
+
+<section id="roi-simulator" class="py-24 sm:py-32 bg-[#12100E] text-white border-b border-stone-800 relative overflow-hidden">
+  <!-- Ambient Fire Glow -->
+  <div class="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#D9381E]/12 rounded-full blur-[160px] pointer-events-none"></div>
+  <div class="absolute bottom-10 left-10 w-[400px] h-[400px] bg-amber-500/8 rounded-full blur-[140px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D9381E]/20 border border-[#D9381E]/40 text-amber-300 text-xs font-black uppercase tracking-widest">
+        <span>📊</span>
+        <span>İNTERAKTİF YATIRIM & KÂRLILIK SİMÜLATÖRÜ</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase font-sans leading-tight">
+        FRANCHISE YATIRIM GETİRİSİ<br />
+        <span class="font-display-serif italic text-[#E59838] capitalize">(ROI) Hesaplayıcı</span>
+      </h2>
+
+      <p class="text-sm sm:text-lg text-stone-300 leading-relaxed">
+        Hedeflediğiniz mağaza konseptini seçin, günlük tahmini adisyon (masa + Yemeksepeti paket) sayısını kaydırarak şubenizin aylık ciro, net kâr ve amortisman süresini canlı simüle edin.
+      </p>
+    </div>
+
+    <!-- Step 1: Select Franchise Concept Model Tabs -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10" id="calc-model-selector">
+      {franchiseConceptModels.map((m) => (
+        <button
+          type="button"
+          data-model-id={m.id}
+          data-avg-inv={m.investmentNumericAvg}
+          data-default-orders={m.defaultDailyOrders}
+          data-default-ticket={m.avgTicketPrice}
+          data-margin={m.profitMarginPercent}
+          data-sqm={m.areaSqm}
+          data-inv-range={m.investmentRange}
+          data-oven={m.ovenType}
+          class={`calc-model-btn text-left p-6 rounded-3xl border transition-all duration-300 cursor-pointer relative overflow-hidden ${
+            m.recommended
+              ? 'bg-gradient-to-br from-[#D9381E]/25 via-[#1C1917] to-[#1C1917] border-[#D9381E] ring-2 ring-[#D9381E]/40 shadow-xl'
+              : 'bg-[#1C1917]/90 border-stone-800 hover:border-stone-600'
+          }`}
+        >
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/10 text-amber-300">
+              {m.badge}
+            </span>
+            <span class="text-xs font-mono text-stone-400">{m.areaSqm}</span>
+          </div>
+          <h3 class="text-lg sm:text-xl font-black text-white">{m.name}</h3>
+          <div class="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+            <span class="text-stone-400">Anahtar Teslim Yatırım:</span>
+            <span class="font-mono font-bold text-[#E59838]">{m.investmentRange}</span>
+          </div>
+        </button>
+      ))}
+    </div>
+
+    <!-- Step 2: Interactive Sliders & Live Financial Output -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      
+      <!-- Left Column: Interactive Sliders & Unit Economics -->
+      <div class="lg:col-span-7 bg-[#1C1917] border border-stone-800 rounded-3xl p-6 sm:p-10 flex flex-col justify-between space-y-8 shadow-2xl">
+        
+        <div class="space-y-6">
+          <div class="flex items-center justify-between border-b border-stone-800 pb-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Simülasyon Parametreleri</span>
+              <h3 id="calc-active-model-title" class="text-xl sm:text-2xl font-black text-white mt-0.5">
+                Cotto Bistro & Napoliten Pizzeria
+              </h3>
+            </div>
+            <span id="calc-active-sqm" class="px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-stone-300">
+              110 - 180 m²
+            </span>
+          </div>
+
+          <!-- Slider 1: Daily Orders (Masa + Yemeksepeti) -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <label for="slider-daily-orders" class="text-xs sm:text-sm font-bold text-stone-200">
+                Günlük Toplam Sipariş / Adisyon (Masa + Paket Servis)
+              </label>
+              <span class="px-3.5 py-1 rounded-xl bg-[#D9381E]/20 border border-[#D9381E]/40 text-amber-300 font-mono font-black text-base">
+                <span id="val-daily-orders">120</span> Adisyon / Gün
+              </span>
+            </div>
+            <input
+              type="range"
+              id="slider-daily-orders"
+              min="50"
+              max="260"
+              step="5"
+              value="120"
+              class="w-full cotto-slider"
+            />
+            <div class="flex justify-between text-[11px] text-stone-500 font-mono">
+              <span>50 (Başlangıç / Butik)</span>
+              <span>120 (Bistro Ortalama)</span>
+              <span>260 (Yüksek Yoğunluk)</span>
+            </div>
+          </div>
+
+          <!-- Slider 2: Average Ticket Size (Sepet Ortalaması) -->
+          <div class="space-y-3 pt-2">
+            <div class="flex items-center justify-between">
+              <label for="slider-ticket-size" class="text-xs sm:text-sm font-bold text-stone-200">
+                Ortalama Adisyon / Sepet Tutarı (Pizza + Burger + İçecek)
+              </label>
+              <span class="px-3.5 py-1 rounded-xl bg-white/10 border border-white/15 text-white font-mono font-black text-base">
+                <span id="val-ticket-size">540</span> ₺
+              </span>
+            </div>
+            <input
+              type="range"
+              id="slider-ticket-size"
+              min="380"
+              max="850"
+              step="10"
+              value="540"
+              class="w-full cotto-slider"
+            />
+            <div class="flex justify-between text-[11px] text-stone-500 font-mono">
+              <span>380 ₺ (Tekil Sipariş)</span>
+              <span>540 ₺ (Standart Masalar)</span>
+              <span>850 ₺ (Aile & Grup Adisyonu)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unit Economics Breakdown Bar -->
+        <div class="space-y-4 pt-6 border-t border-stone-800">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-stone-300">
+              Cotto Napoliten Şeffaf Birim Ekonomisi (Ciro Dağılımı)
+            </span>
+            <span class="text-xs font-mono text-emerald-400 font-bold">Fire Oranı &lt; %2</span>
+          </div>
+
+          <!-- Stacked Progress Bar -->
+          <div class="w-full h-3.5 rounded-full overflow-hidden flex bg-stone-800">
+            {unitEconomicsBreakdown.map((u) => (
+              <div style={`width: ${u.percent}%`} class={`${u.color} h-full`} title={`${u.label}: %${u.percent}`}></div>
+            ))}
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1">
+            {unitEconomicsBreakdown.map((u) => (
+              <div class="p-2.5 rounded-xl bg-black/30 border border-white/5 flex items-start gap-2">
+                <span class={`w-2.5 h-2.5 rounded-full ${u.color} shrink-0 mt-1`}></span>
+                <div>
+                  <div class="text-xs font-mono font-bold text-white">%{u.percent}</div>
+                  <div class="text-[10px] text-stone-400 leading-tight">{u.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Financial Output Card -->
+      <div class="lg:col-span-5 bg-gradient-to-b from-[#201A17] to-[#161311] border-2 border-[#D9381E]/50 rounded-3xl p-6 sm:p-10 flex flex-col justify-between space-y-6 shadow-2xl relative">
+        
+        <div class="space-y-6">
+          <div class="flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-black uppercase tracking-wider">
+              ● CANLI FİZİBİLİTE PROJEKSİYONU
+            </span>
+            <span id="calc-margin-badge" class="font-mono text-xs font-bold text-amber-400">%30 Net Kâr</span>
+          </div>
+
+          <!-- Monthly Revenue -->
+          <div class="p-5 rounded-2xl bg-black/40 border border-white/10 space-y-1">
+            <span class="text-xs text-stone-400 uppercase font-bold tracking-wider">Tahmini Aylık Brüt Ciro</span>
+            <div id="out-monthly-revenue" class="text-3xl sm:text-4xl font-black text-white font-mono tracking-tight">
+              1.944.000 ₺
+            </div>
+            <span class="text-[11px] text-stone-500 block">30 iş günü x günlük adisyon hacmi</span>
+          </div>
+
+          <!-- Monthly Net Profit (Highlighted) -->
+          <div class="p-5 rounded-2xl bg-emerald-950/30 border border-emerald-500/40 space-y-1">
+            <span class="text-xs text-emerald-300 uppercase font-black tracking-wider">Tahmini Aylık Net İşletme Kârı (EBITDA)</span>
+            <div id="out-monthly-profit" class="text-3xl sm:text-5xl font-black text-emerald-400 font-mono tracking-tight">
+              583.200 ₺
+            </div>
+            <span class="text-[11px] text-emerald-200/70 block">Hammadde, kira, personel ve enerji giderleri düşülmüş net kazanç</span>
+          </div>
+
+          <!-- Payback Period & Annual Profit Grid -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+              <span class="text-[11px] text-stone-400 font-bold uppercase block">Amortisman (ROI)</span>
+              <span id="out-payback-months" class="text-2xl sm:text-3xl font-black text-[#E59838] font-mono mt-1 block">
+                ~7.5 Ay
+              </span>
+              <span class="text-[10px] text-stone-400">Yatırım Geri Dönüşü</span>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+              <span class="text-[11px] text-stone-400 font-bold uppercase block">Yıllık Net Kâr</span>
+              <span id="out-annual-profit" class="text-xl sm:text-2xl font-black text-white font-mono mt-1 block">
+                7.00M ₺
+              </span>
+              <span class="text-[10px] text-stone-400">12 Aylık Projeksiyon</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA to Apply with Selected Model -->
+        <div class="pt-4 border-t border-white/10 space-y-3">
+          <a
+            id="calc-apply-cta"
+            href={isStandalonePage ? '#basvuru' : '/franchise#basvuru'}
+            class="btn-21st-shimmer w-full py-4 px-6 rounded-2xl bg-[#D9381E] hover:bg-[#b82d16] text-white font-black text-xs sm:text-sm uppercase tracking-wider text-center block shadow-xl shadow-red-600/25 transition-all hover:scale-102"
+          >
+            Bu Modelle Franchise Başvurusu Yap →
+          </a>
+          <p class="text-[11px] text-stone-500 text-center leading-relaxed">
+            * Simülasyon verileri mevcut şube ortalamaları ve 2026 gıda/operasyon maliyet oranlarına dayalı tahmini projeksiyondur. Lokasyon bazlı resmi fizibilite raporu ücretsiz sunulur.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function setupFranchiseCalculator() {
+    const modelBtns = document.querySelectorAll<HTMLButtonElement>('.calc-model-btn');
+    const sliderOrders = document.getElementById('slider-daily-orders') as HTMLInputElement | null;
+    const sliderTicket = document.getElementById('slider-ticket-size') as HTMLInputElement | null;
+
+    const valOrders = document.getElementById('val-daily-orders');
+    const valTicket = document.getElementById('val-ticket-size');
+    const activeTitle = document.getElementById('calc-active-model-title');
+    const activeSqm = document.getElementById('calc-active-sqm');
+    const marginBadge = document.getElementById('calc-margin-badge');
+
+    const outRevenue = document.getElementById('out-monthly-revenue');
+    const outProfit = document.getElementById('out-monthly-profit');
+    const outPayback = document.getElementById('out-payback-months');
+    const outAnnual = document.getElementById('out-annual-profit');
+
+    let currentAvgInvestmentMil = 3.85; // 3.85M TL default for Bistro
+    let currentMarginPercent = 30;
+
+    function formatTRY(num: number): string {
+      return new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 0 }).format(Math.round(num)) + ' ₺';
+    }
+
+    function recalculate() {
+      if (!sliderOrders || !sliderTicket) return;
+      const dailyOrders = parseInt(sliderOrders.value, 10) || 120;
+      const ticketSize = parseInt(sliderTicket.value, 10) || 540;
+
+      if (valOrders) valOrders.textContent = dailyOrders.toString();
+      if (valTicket) valTicket.textContent = ticketSize.toString();
+
+      const monthlyRevenue = dailyOrders * ticketSize * 30;
+      const monthlyProfit = monthlyRevenue * (currentMarginPercent / 100);
+      const annualProfit = monthlyProfit * 12;
+
+      const totalInvestmentTL = currentAvgInvestmentMil * 1_000_000;
+      const rawPaybackMonths = totalInvestmentTL / Math.max(monthlyProfit, 1);
+      const clampedPayback = Math.max(6, Math.min(36, rawPaybackMonths));
+
+      if (outRevenue) outRevenue.textContent = formatTRY(monthlyRevenue);
+      if (outProfit) outProfit.textContent = formatTRY(monthlyProfit);
+      if (outPayback) outPayback.textContent = `${clampedPayback.toFixed(1)} Ay`;
+      if (outAnnual) outAnnual.textContent = `${(annualProfit / 1_000_000).toFixed(2)}M ₺`;
+    }
+
+    modelBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        modelBtns.forEach((b) => {
+          b.classList.remove('from-[#D9381E]/25', 'border-[#D9381E]', 'ring-2', 'ring-[#D9381E]/40', 'bg-gradient-to-br');
+          b.classList.add('bg-[#1C1917]/90', 'border-stone-800');
+        });
+        btn.classList.remove('bg-[#1C1917]/90', 'border-stone-800');
+        btn.classList.add('bg-gradient-to-br', 'from-[#D9381E]/25', 'via-[#1C1917]', 'to-[#1C1917]', 'border-[#D9381E]', 'ring-2', 'ring-[#D9381E]/40');
+
+        const avgInv = parseFloat(btn.getAttribute('data-avg-inv') || '3.85');
+        const defOrders = btn.getAttribute('data-default-orders') || '120';
+        const defTicket = btn.getAttribute('data-default-ticket') || '540';
+        const margin = parseInt(btn.getAttribute('data-margin') || '30', 10);
+        const sqm = btn.getAttribute('data-sqm') || '';
+        const title = btn.querySelector('h3')?.textContent || '';
+
+        currentAvgInvestmentMil = avgInv;
+        currentMarginPercent = margin;
+
+        if (sliderOrders) sliderOrders.value = defOrders;
+        if (sliderTicket) sliderTicket.value = defTicket;
+        if (activeTitle) activeTitle.textContent = title;
+        if (activeSqm) activeSqm.textContent = sqm;
+        if (marginBadge) marginBadge.textContent = `%${margin} Hedef Net Kâr`;
+
+        recalculate();
+      });
+    });
+
+    sliderOrders?.addEventListener('input', recalculate);
+    sliderTicket?.addEventListener('input', recalculate);
+
+    recalculate();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFranchiseCalculator);
+  } else {
+    setupFranchiseCalculator();
+  }
+</script>
